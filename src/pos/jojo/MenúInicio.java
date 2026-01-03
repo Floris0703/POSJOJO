@@ -16,6 +16,15 @@ public class MenúInicio extends javax.swing.JFrame {
      */
     public MenúInicio() {
         initComponents();
+
+        //inicializacion correcta componentes
+        jpnVentas.setVisible(false);
+        jpnConsulta.setVisible(false);
+        jpnEstadisticas.setVisible(false);
+        jpnInventario.setVisible(false);
+        jpnReportes.setVisible(false);
+        jpnUsuario.setVisible(false);
+
     }
 
     /**
@@ -28,6 +37,7 @@ public class MenúInicio extends javax.swing.JFrame {
     private void initComponents() {
 
         jProgressBar1 = new javax.swing.JProgressBar();
+        jButton4 = new javax.swing.JButton();
         jpnInicio = new javax.swing.JPanel();
         jpnMenu = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
@@ -77,9 +87,20 @@ public class MenúInicio extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         jpnReportes = new javax.swing.JPanel();
         jpnInventario = new javax.swing.JPanel();
+        jpnCuerpoInventario = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btnBuscInv = new javax.swing.JButton();
+        btnElimInv = new javax.swing.JButton();
+        btnAgregInv = new javax.swing.JButton();
+        btnActInv = new javax.swing.JButton();
+        btnGuardarInv = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jpnConsulta = new javax.swing.JPanel();
         jpnUsuario = new javax.swing.JPanel();
         jpnEstadisticas = new javax.swing.JPanel();
+
+        jButton4.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        jButton4.setText("Agregar");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -274,7 +295,7 @@ public class MenúInicio extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpnCuerpo.setBackground(new java.awt.Color(0, 0, 0));
@@ -549,15 +570,81 @@ public class MenúInicio extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        jpnInventario.setMaximumSize(new java.awt.Dimension(866, 469));
+        jpnInventario.setMinimumSize(new java.awt.Dimension(866, 469));
+
+        jpnCuerpoInventario.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Inventario");
+
+        btnBuscInv.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        btnBuscInv.setText("Buscar");
+
+        btnElimInv.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        btnElimInv.setText("Eliminar");
+
+        btnAgregInv.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        btnAgregInv.setText("Agregar");
+
+        btnActInv.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        btnActInv.setText("Actualizar");
+
+        btnGuardarInv.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        btnGuardarInv.setText("Guardar Cambios");
+
+        javax.swing.GroupLayout jpnCuerpoInventarioLayout = new javax.swing.GroupLayout(jpnCuerpoInventario);
+        jpnCuerpoInventario.setLayout(jpnCuerpoInventarioLayout);
+        jpnCuerpoInventarioLayout.setHorizontalGroup(
+            jpnCuerpoInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnCuerpoInventarioLayout.createSequentialGroup()
+                .addGroup(jpnCuerpoInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnCuerpoInventarioLayout.createSequentialGroup()
+                        .addGap(390, 390, 390)
+                        .addComponent(btnGuardarInv))
+                    .addGroup(jpnCuerpoInventarioLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jpnCuerpoInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpnCuerpoInventarioLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(152, 152, 152)
+                                .addComponent(btnBuscInv)
+                                .addGap(26, 26, 26)
+                                .addComponent(btnElimInv)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAgregInv)
+                                .addGap(41, 41, 41)
+                                .addComponent(btnActInv)))))
+                .addContainerGap(113, Short.MAX_VALUE))
+        );
+        jpnCuerpoInventarioLayout.setVerticalGroup(
+            jpnCuerpoInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnCuerpoInventarioLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jpnCuerpoInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnBuscInv)
+                    .addComponent(btnElimInv)
+                    .addComponent(btnActInv)
+                    .addComponent(btnAgregInv))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardarInv)
+                .addGap(40, 40, 40))
+        );
+
         javax.swing.GroupLayout jpnInventarioLayout = new javax.swing.GroupLayout(jpnInventario);
         jpnInventario.setLayout(jpnInventarioLayout);
         jpnInventarioLayout.setHorizontalGroup(
             jpnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addComponent(jpnCuerpoInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jpnInventarioLayout.setVerticalGroup(
             jpnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addComponent(jpnCuerpoInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpnConsultaLayout = new javax.swing.GroupLayout(jpnConsulta);
@@ -728,13 +815,20 @@ public class MenúInicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActInv;
+    private javax.swing.JButton btnAgregInv;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnBuscInv;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCalcular;
+    private javax.swing.JButton btnElimInv;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnGuardarInv;
     private javax.swing.JComboBox<String> cbbCateg;
     private javax.swing.JComboBox<String> cbbForPago;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -765,8 +859,10 @@ public class MenúInicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpnConsulta;
     private javax.swing.JPanel jpnCuerpo;
+    private javax.swing.JPanel jpnCuerpoInventario;
     private javax.swing.JPanel jpnEstadisticas;
     private javax.swing.JPanel jpnInicio;
     private javax.swing.JPanel jpnInventario;
