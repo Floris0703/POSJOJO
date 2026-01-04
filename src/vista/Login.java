@@ -304,11 +304,13 @@ public class Login extends javax.swing.JFrame {
         if (!txtUser.getText().isEmpty() && !txtPsswrd.getText().isEmpty()) {
             ctrlUsuario controlUsuario = new ctrlUsuario();
             Usuario usuario = new Usuario();
+            MenuInicio mn = new MenuInicio();
             usuario.setNombre(txtUser.getText().trim());
             usuario.setPsswrd(txtPsswrd.getText().trim());
             if (controlUsuario.LoginUser(usuario)) {
                 JOptionPane.showMessageDialog(null, "Inicio de sesion correcto");
-
+                this.setVisible(false);
+                mn.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
             }
