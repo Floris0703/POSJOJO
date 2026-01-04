@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pos.jojo;
+package vista;
 
 /**
  *
@@ -768,8 +768,8 @@ public class MenúInicio extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jButton1)
                 .addGap(61, 61, 61)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IdItem1)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(IdItem1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblIdItemResul, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
