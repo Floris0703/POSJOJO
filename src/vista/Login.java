@@ -5,8 +5,13 @@
  */
 package vista;
 
+import controlador.ctrlUsuario;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import modelo.Usuario;
 
 /**
  *
@@ -23,9 +28,14 @@ public class Login extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setTitle("Login - Punto de venta Jojo");
-        this.setSize(new Dimension(700,500));
+        this.setSize(new Dimension(700, 500));
     }
-
+    
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("img/ventas.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,6 +62,7 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setIconImage(getIconImage());
         setMaximumSize(new java.awt.Dimension(700, 500));
         setMinimumSize(new java.awt.Dimension(700, 500));
         setPreferredSize(new java.awt.Dimension(700, 500));
@@ -73,11 +84,26 @@ public class Login extends javax.swing.JFrame {
         lblUser.setText("Usuario:");
 
         txtUser.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserKeyPressed(evt);
+            }
+        });
 
         btnIngresar.setBackground(new java.awt.Color(255, 51, 0));
         btnIngresar.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("Ingresar");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
+        btnIngresar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnIngresarKeyPressed(evt);
+            }
+        });
 
         txtPsswrd.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         txtPsswrd.addActionListener(new java.awt.event.ActionListener() {
@@ -207,6 +233,22 @@ public class Login extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Proximamente");
     }//GEN-LAST:event_btnFacebookActionPerformed
 
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        this.Login();
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtPsswrd.requestFocus();
+        }
+    }//GEN-LAST:event_txtUserKeyPressed
+
+    private void btnIngresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnIngresarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.Login();
+        }
+    }//GEN-LAST:event_btnIngresarKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -257,4 +299,21 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPsswrd;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
+
+    private void Login() {
+        if (!txtUser.getText().isEmpty() && !txtPsswrd.getText().isEmpty()) {
+            ctrlUsuario controlUsuario = new ctrlUsuario();
+            Usuario usuario = new Usuario();
+            usuario.setNombre(txtUser.getText().trim());
+            usuario.setPsswrd(txtPsswrd.getText().trim());
+            if (controlUsuario.LoginUser(usuario)) {
+                JOptionPane.showMessageDialog(null, "Inicio de sesion correcto");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese sus credenciales");
+        }
+    }
 }
