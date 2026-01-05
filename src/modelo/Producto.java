@@ -21,7 +21,7 @@ public class Producto {
     private boolean estado;
 
     //Constructor
-    public Producto() {
+    public Producto(int idItem, String descripcion, int stock, int stockMin, double costo, double pVenta, String categoria, boolean estado) {
         this.idItem = 0;
         this.descripcion = "";
         this.stock = 0;

@@ -23,7 +23,7 @@ public class DetalleVentas {
     private double precioU;
     private int cantidad;
     
-    public DetalleVentas(){
+    public DetalleVentas(int idDetalleVenta, int idCabeceraVenta, int idProducto, double precioU, int cantidad){
         this.idDetalleVenta=0;
         this.idCabeceraVenta=0;
         this.idProducto=0;

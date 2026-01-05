@@ -23,7 +23,7 @@ public class Historial {
     private String accion;
     private LocalDateTime fecha;
     
-    public Historial(){
+    public Historial(int idHistorial, int idUsuario, String accion, LocalDateTime fecha){
         this.idHistorial=0;
         this.idUsuario=0;
         this.accion="";
