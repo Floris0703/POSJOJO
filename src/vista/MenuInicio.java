@@ -8,6 +8,8 @@ package vista;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  *
@@ -20,9 +22,13 @@ public class MenuInicio extends javax.swing.JFrame {
      */
     public MenuInicio() {
         initComponents();
-
-        this.setSize(new Dimension(1143, 529));
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setTitle("Punto de venta Jojo");
+    }
+    
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("img/ventas.png"));
+        return retValue;
     }
 
     /**
