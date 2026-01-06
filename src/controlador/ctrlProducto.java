@@ -153,6 +153,41 @@ public class ctrlProducto {
         return respuesta;
     }
 
+    public void consultaProductos(JTable tabla, String texto) {
+
+    DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+    model.setRowCount(0); // limpiar tabla
+
+    String sql = "SELECT idItem, descripcion, stock, stock_min, costo, p_venta, categoria, estado"
+            + "FROM tb_Inventario WHERE descripcion LIKE ? OR categoria LIKE ?";
+    
+
+    try (Connection cn = Conexion.conectar();
+         PreparedStatement ps = cn.prepareStatement(sql)) {
+
+        ps.setString(1, "%" + texto + "%");
+        ps.setString(2, "%" + texto + "%");
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            model.addRow(new Object[]{
+                rs.getInt("idItem"),
+                rs.getString("descripcion"),
+                rs.getInt("stock"),
+                rs.getInt("stock_min"),
+                rs.getDouble("costo"),
+                rs.getDouble("p_venta"),
+                rs.getString("categoria"),
+                rs.getBoolean("estado")
+            });
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error al buscar: " + e.getMessage());
+    }
+}
+
     public void buscarProductos(JTable tabla, String texto) {
 
         DefaultTableModel model = new DefaultTableModel();
