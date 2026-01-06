@@ -5,14 +5,22 @@
  */
 package vista;
 
+import conexion.Conexion;
 import controlador.ctrlProducto;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import modelo.Producto;
 
 /**
@@ -24,9 +32,13 @@ public class MenuInicio extends javax.swing.JFrame {
     /**
      * Creates new form MenuInicio
      */
+    private int idItem;
+    ctrlProducto control = new ctrlProducto();
+
     public MenuInicio() {
         initComponents();
         this.setTitle("Punto de venta Jojo");
+        control.listarProductos(jtbInventario);
     }
 
     @Override
@@ -123,12 +135,20 @@ public class MenuInicio extends javax.swing.JFrame {
         jpnUsuario = new javax.swing.JPanel();
         jpnEstadisticas = new javax.swing.JPanel();
         jpnInventario = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        scrollInventario = new javax.swing.JScrollPane();
+        jtbInventario = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        btnBorrar = new javax.swing.JButton();
+        btnBuscarProd = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnMostrar = new javax.swing.JButton();
 
         jButton4.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jButton4.setText("Agregar");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(null);
 
         jpnMenu.setBackground(new java.awt.Color(0, 0, 0));
         jpnMenu.setForeground(new java.awt.Color(255, 255, 255));
@@ -807,16 +827,74 @@ public class MenuInicio extends javax.swing.JFrame {
 
         jpnCuerpo.add(jpnEstadisticas, "Estadisticas");
 
-        javax.swing.GroupLayout jpnInventarioLayout = new javax.swing.GroupLayout(jpnInventario);
-        jpnInventario.setLayout(jpnInventarioLayout);
-        jpnInventarioLayout.setHorizontalGroup(
-            jpnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 903, Short.MAX_VALUE)
-        );
-        jpnInventarioLayout.setVerticalGroup(
-            jpnInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 596, Short.MAX_VALUE)
-        );
+        jpnInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jtbInventario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        scrollInventario.setViewportView(jtbInventario);
+
+        jPanel2.add(scrollInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 590, 440));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 710, 460));
+
+        jLabel12.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Inventario");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        btnBorrar.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 140, -1, -1));
+
+        btnBuscarProd.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        btnBuscarProd.setText("Buscar");
+        btnBuscarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProdActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, -1, -1));
+
+        btnEditar.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 90, -1, -1));
+
+        btnMostrar.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        btnMostrar.setText("Mostrar");
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, -1, -1));
+
+        jpnInventario.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         jpnCuerpo.add(jpnInventario, "Inventario");
 
@@ -1021,6 +1099,7 @@ public class MenuInicio extends javax.swing.JFrame {
                 if (controlProd.guardar(producto)) {
                     JOptionPane.showMessageDialog(null, "Registro guardado");
                     this.limpiarProducto();
+                    control.listarProductos(jtbInventario);
                 } else {
                     JOptionPane.showMessageDialog(null, "Error al guardar el producto ");
                 }
@@ -1032,6 +1111,119 @@ public class MenuInicio extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnGuardarProdActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int fila = jtbInventario.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto");
+            return;
+        }
+
+        Producto p = new Producto();
+
+        String descripcion = JOptionPane.showInputDialog(
+                this,
+                "Ingrese la nueva descripción:",
+                jtbInventario.getValueAt(fila, 1)
+        );
+
+        int stock = Integer.parseInt(JOptionPane.showInputDialog(
+                this,
+                "Ingrese el nuevo stock:",
+                jtbInventario.getValueAt(fila, 2)
+        ));
+
+        int stockMin = Integer.parseInt(JOptionPane.showInputDialog(
+                this,
+                "Ingrese el nuevo stock mínimo:",
+                jtbInventario.getValueAt(fila, 3)
+        ));
+
+        double costo = Double.parseDouble(JOptionPane.showInputDialog(
+                this,
+                "Ingrese el nuevo costo:",
+                jtbInventario.getValueAt(fila, 4)
+        ));
+
+        double pventa = Double.parseDouble(JOptionPane.showInputDialog(
+                this,
+                "Ingrese el nuevo precio:",
+                jtbInventario.getValueAt(fila, 5)
+        ));
+
+        String categoria = JOptionPane.showInputDialog(
+                this,
+                "Ingrese la nueva categoría:",
+                jtbInventario.getValueAt(fila, 6)
+        );
+
+        p.setIdItem(Integer.parseInt(jtbInventario.getValueAt(fila, 0).toString()));
+        p.setDescripcion(descripcion);
+        p.setStock(stock);
+        p.setStockMin(stockMin);
+        p.setCosto(costo);
+        p.setpVenta(pventa);
+        p.setCategoria(categoria);
+        p.setEstado(true);
+
+        if (control.editarProducto(p)) {
+            JOptionPane.showMessageDialog(this, "Producto actualizado");
+            control.listarProductos(jtbInventario);
+        }
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        // TODO add your handling code here:
+        int fila = jtbInventario.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto");
+            return;
+        }
+
+        int opcion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Desea eliminar este producto?",
+                "Confirmar",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (opcion != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        int idProducto = Integer.parseInt(
+                jtbInventario.getValueAt(fila, 0).toString()
+        );
+
+        if (control.eliminarProducto(idProducto)) {
+            JOptionPane.showMessageDialog(this, "Eliminado correctamente");
+            control.listarProductos(jtbInventario);
+        }
+    }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
+        // TODO add your handling code here:
+        String texto = JOptionPane.showInputDialog(
+                this,
+                "Buscar por categoría o descripción:"
+        ).trim();
+
+        if (texto.isEmpty()) {
+            control.listarProductos(jtbInventario);
+        } else {
+            control.buscarProductos(jtbInventario, texto);
+        }
+
+    }//GEN-LAST:event_btnBuscarProdActionPerformed
+
+    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+        // TODO add your handling code here:
+        control.listarProductos(jtbInventario);
+    }//GEN-LAST:event_btnMostrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1072,14 +1264,18 @@ public class MenuInicio extends javax.swing.JFrame {
     private javax.swing.JLabel IdItem;
     private javax.swing.JLabel IdItem1;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscarProd;
     private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnConsulta;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEstadisticas;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnGuardarProd;
     private javax.swing.JButton btnInventario;
+    private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnProd;
     private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnUsuario;
@@ -1091,6 +1287,7 @@ public class MenuInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1114,6 +1311,8 @@ public class MenuInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JProgressBar jProgressBar1;
@@ -1131,12 +1330,14 @@ public class MenuInicio extends javax.swing.JFrame {
     private javax.swing.JPanel jpnReporte;
     private javax.swing.JPanel jpnUsuario;
     private javax.swing.JPanel jpnVentas;
+    public static javax.swing.JTable jtbInventario;
     private javax.swing.JLabel lblDescResul;
     private javax.swing.JLabel lblIdItemResul;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblPrecioResul;
     private javax.swing.JLabel lblStock;
     private javax.swing.JScrollPane sclItems;
+    public static javax.swing.JScrollPane scrollInventario;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCategoria;
     private javax.swing.JTextField txtCosto;
@@ -1159,4 +1360,5 @@ public class MenuInicio extends javax.swing.JFrame {
         txtpVenta.setText("");
         txtCategoria.setText("");
     }
+
 }

@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import modelo.Producto;
 
 /**
@@ -69,6 +71,129 @@ public class ctrlProducto {
             System.out.println("Error al consultar " + e);
         }
         return respuesta;
+    }
+
+    public void listarProductos(JTable tabla) {
+
+        DefaultTableModel model = new DefaultTableModel();
+        tabla.setModel(model);
+
+        model.addColumn("ID");
+        model.addColumn("Descripción");
+        model.addColumn("Stock");
+        model.addColumn("Stock Min");
+        model.addColumn("Costo");
+        model.addColumn("Precio Venta");
+        model.addColumn("Categoría");
+        model.addColumn("Estado");
+
+        String sql = "SELECT * FROM tb_Inventario where estado= true";
+
+        try (Connection cn = Conexion.conectar();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Object[] fila = new Object[8];
+                fila[0] = rs.getInt("idItem");
+                fila[1] = rs.getString("descripcion");
+                fila[2] = rs.getInt("stock");
+                fila[3] = rs.getInt("stock_min");
+                fila[4] = rs.getDouble("costo");
+                fila[5] = rs.getDouble("p_venta");
+                fila[6] = rs.getString("categoria");
+                fila[7] = rs.getBoolean("estado");
+
+                model.addRow(fila);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al listar productos: " + e);
+        }
+    }
+
+    public boolean editarProducto(Producto p) {
+        boolean respuesta = false;
+        String sql = "UPDATE tb_Inventario SET descripcion=?, stock=?, stock_min=?, costo=?, p_venta=?, categoria=?, estado=? WHERE idItem=?";
+
+        try (Connection cn = Conexion.conectar();
+                PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setString(1, p.getDescripcion());
+            ps.setInt(2, p.getStock());
+            ps.setInt(3, p.getStockMin());
+            ps.setDouble(4, p.getCosto());
+            ps.setDouble(5, p.getpVenta());
+            ps.setString(6, p.getCategoria());
+            ps.setBoolean(7, p.isEstado());
+            ps.setInt(8, p.getIdItem());
+
+            respuesta = ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error al editar: " + e);
+        }
+        return respuesta;
+    }
+
+    public boolean eliminarProducto(int idProducto) {
+        boolean respuesta = false;
+        String sql = "UPDATE tb_Inventario SET estado = false WHERE idItem = ?";
+        /*delete from tbInventario where idItem=?*/
+
+        try (Connection cn = Conexion.conectar();
+                PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setInt(1, idProducto);
+            respuesta = ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar: " + e);
+        }
+        return respuesta;
+    }
+
+    public void buscarProductos(JTable tabla, String texto) {
+
+        DefaultTableModel model = new DefaultTableModel();
+        tabla.setModel(model);
+
+        model.addColumn("ID");
+        model.addColumn("Descripción");
+        model.addColumn("Stock");
+        model.addColumn("Stock Min");
+        model.addColumn("Costo");
+        model.addColumn("Precio");
+        model.addColumn("Categoría");
+        model.addColumn("Estado");
+
+        String sql = "SELECT * FROM tb_Inventario "
+                + "WHERE descripcion LIKE ? OR categoria LIKE ?";
+
+        try (Connection cn = Conexion.conectar();
+                PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + texto + "%");
+            ps.setString(2, "%" + texto + "%");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getInt("idItem"),
+                    rs.getString("descripcion"),
+                    rs.getInt("stock"),
+                    rs.getInt("stock_min"),
+                    rs.getDouble("costo"),
+                    rs.getDouble("p_venta"),
+                    rs.getString("categoria"),
+                    rs.getBoolean("estado")
+                });
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al buscar: " + e);
+        }
     }
 
 }
