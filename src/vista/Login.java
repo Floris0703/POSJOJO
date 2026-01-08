@@ -30,12 +30,13 @@ public class Login extends javax.swing.JFrame {
         this.setTitle("Login - Punto de venta Jojo");
         this.setSize(new Dimension(700, 500));
     }
-    
+
     @Override
-    public Image getIconImage(){
+    public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("img/ventas.png"));
         return retValue;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -319,31 +320,31 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 
-   private void Login() {
+    private void Login() {
 
-    if (!txtUser.getText().isEmpty() && !txtPsswrd.getText().isEmpty()) {
+        if (!txtUser.getText().isEmpty() && !txtPsswrd.getText().isEmpty()) {
 
-        ctrlUsuario controlUsuario = new ctrlUsuario();
-        Usuario usuario = new Usuario();
+            ctrlUsuario controlUsuario = new ctrlUsuario();
+            Usuario usuario = new Usuario();
 
-        usuario.setNombre(txtUser.getText().trim());
-        usuario.setPsswrd(txtPsswrd.getText().trim());
+            usuario.setNombre(txtUser.getText().trim());
+            usuario.setPsswrd(txtPsswrd.getText().trim());
 
-        int idUsuario = controlUsuario.LoginUser(usuario);
+            int idUsuario = controlUsuario.LoginUser(usuario);
 
-        if (idUsuario > 0) {
-            JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
+            if (idUsuario > 0) {
+                JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
 
-            MenuInicio mn = new MenuInicio(idUsuario);
-            mn.setVisible(true);
-            this.dispose();
+                MenuInicio mn = new MenuInicio(idUsuario);
+                mn.setVisible(true);
+                this.dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
+            }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
+            JOptionPane.showMessageDialog(null, "Ingrese sus credenciales");
         }
-
-    } else {
-        JOptionPane.showMessageDialog(null, "Ingrese sus credenciales");
     }
-}
 }

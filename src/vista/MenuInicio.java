@@ -5,27 +5,37 @@
  */
 package vista;
 
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfWriter;
 import conexion.Conexion;
+import controlador.ctrlCorte;
 import controlador.ctrlProducto;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.io.FileOutputStream;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.event.DocumentEvent;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Element;
+import javax.swing.text.Position;
+import javax.swing.text.Segment;
 import modelo.Carrito;
+import modelo.Corte;
 import modelo.Producto;
 
 /**
@@ -134,6 +144,19 @@ public class MenuInicio extends javax.swing.JFrame {
         scrollInventario1 = new javax.swing.JScrollPane();
         jtbConsulta = new javax.swing.JTable();
         jpnReporte = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        btnPDF = new javax.swing.JButton();
+        lblTotalFinal = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        lblEfectivo = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        lblTransfer = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        lblTarjeta = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        spFecha = new javax.swing.JSpinner();
+        btnCorte = new javax.swing.JButton();
         jpnUsuario = new javax.swing.JPanel();
         jpnEstadisticas = new javax.swing.JPanel();
         jpnInventario = new javax.swing.JPanel();
@@ -654,15 +677,147 @@ public class MenuInicio extends javax.swing.JFrame {
 
         jpnCuerpo.add(jpnConsulta, "Consulta");
 
+        jpnReporte.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabel13.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Total:");
+
+        btnPDF.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        btnPDF.setText("PDF");
+        btnPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPDFActionPerformed(evt);
+            }
+        });
+
+        lblTotalFinal.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        lblTotalFinal.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalFinal.setText("0.00");
+
+        jLabel18.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Reporte de ventas | Corte de caja");
+
+        lblEfectivo.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        lblEfectivo.setForeground(new java.awt.Color(255, 255, 255));
+        lblEfectivo.setText("0.00");
+
+        jLabel24.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Efectivo:");
+
+        lblTransfer.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        lblTransfer.setForeground(new java.awt.Color(255, 255, 255));
+        lblTransfer.setText("0.00");
+
+        jLabel26.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Transferencia:");
+
+        lblTarjeta.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        lblTarjeta.setForeground(new java.awt.Color(255, 255, 255));
+        lblTarjeta.setText("0.00");
+
+        jLabel28.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("Tarjeta:");
+
+        jLabel14.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Seleccione la fecha");
+
+        spFecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        spFecha.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1767850427028L), null, null, java.util.Calendar.DAY_OF_MONTH));
+
+        btnCorte.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        btnCorte.setText("Corte");
+        btnCorte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCorteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnReporteLayout = new javax.swing.GroupLayout(jpnReporte);
         jpnReporte.setLayout(jpnReporteLayout);
         jpnReporteLayout.setHorizontalGroup(
             jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 903, Short.MAX_VALUE)
+            .addGroup(jpnReporteLayout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnReporteLayout.createSequentialGroup()
+                        .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpnReporteLayout.createSequentialGroup()
+                                .addGap(166, 166, 166)
+                                .addComponent(lblTarjeta))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel28)
+                                    .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jpnReporteLayout.createSequentialGroup()
+                                            .addComponent(jLabel26)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblTransfer))
+                                        .addGroup(jpnReporteLayout.createSequentialGroup()
+                                            .addComponent(jLabel24)
+                                            .addGap(91, 91, 91)
+                                            .addComponent(lblEfectivo))))
+                                .addGroup(jpnReporteLayout.createSequentialGroup()
+                                    .addComponent(jLabel13)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblTotalFinal))))
+                        .addContainerGap(641, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnReporteLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnCorte)
+                            .addComponent(btnPDF))
+                        .addGap(60, 60, 60))))
+            .addGroup(jpnReporteLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel14)
+                    .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpnReporteLayout.createSequentialGroup()
+                    .addGap(41, 41, 41)
+                    .addComponent(jLabel18)
+                    .addContainerGap(574, Short.MAX_VALUE)))
         );
         jpnReporteLayout.setVerticalGroup(
             jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 596, Short.MAX_VALUE)
+            .addGroup(jpnReporteLayout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel14)
+                    .addComponent(btnCorte))
+                .addGap(18, 18, 18)
+                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPDF))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(lblTotalFinal))
+                .addGap(28, 28, 28)
+                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEfectivo)
+                    .addComponent(jLabel24))
+                .addGap(42, 42, 42)
+                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTransfer)
+                    .addComponent(jLabel26))
+                .addGap(27, 27, 27)
+                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTarjeta)
+                    .addComponent(jLabel28))
+                .addGap(124, 124, 124))
+            .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpnReporteLayout.createSequentialGroup()
+                    .addGap(31, 31, 31)
+                    .addComponent(jLabel18)
+                    .addContainerGap(544, Short.MAX_VALUE)))
         );
 
         jpnCuerpo.add(jpnReporte, "Reporte");
@@ -872,6 +1027,7 @@ public class MenuInicio extends javax.swing.JFrame {
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         CardLayout card = (CardLayout) jpnCuerpo.getLayout();
         card.show(jpnCuerpo, "Reporte");
+        this.configurarSpinnerFecha();
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
@@ -1206,6 +1362,29 @@ public class MenuInicio extends javax.swing.JFrame {
         recalcularTotal();
     }//GEN-LAST:event_btnEliminarItemActionPerformed
 
+    private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
+        // TODO add your handling code here:
+        Date fechaSpinner = (Date) spFecha.getValue();
+
+        ctrlCorte ctrl = new ctrlCorte();
+        ctrl.generarCorteCaja(fechaSpinner);
+
+    }//GEN-LAST:event_btnPDFActionPerformed
+
+    private void btnCorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorteActionPerformed
+        // TODO add your handling code here:
+        Date fechaSpinner = (Date) spFecha.getValue();
+
+        ctrlCorte ctrl = new ctrlCorte();
+        Corte totales = ctrl.obtenerTotales(fechaSpinner);
+
+        lblEfectivo.setText(String.valueOf(totales.getEfectivo()));
+        lblTarjeta.setText(String.valueOf(totales.getTarjeta()));
+        lblTransfer.setText(String.valueOf(totales.getTransferencia()));
+        lblTotalFinal.setText(String.valueOf(totales.getTotalGeneral()));
+    
+    }//GEN-LAST:event_btnCorteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IdItem;
@@ -1215,6 +1394,7 @@ public class MenuInicio extends javax.swing.JFrame {
     private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnConsul;
     private javax.swing.JButton btnConsulta;
+    private javax.swing.JButton btnCorte;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEditarCarrito;
     private javax.swing.JButton btnEliminarItem;
@@ -1223,6 +1403,7 @@ public class MenuInicio extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardarProd;
     private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnMostrar;
+    private javax.swing.JButton btnPDF;
     private javax.swing.JButton btnProd;
     private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnUsuario;
@@ -1234,14 +1415,20 @@ public class MenuInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1271,11 +1458,16 @@ public class MenuInicio extends javax.swing.JFrame {
     public static javax.swing.JTable jtbConsulta;
     public static javax.swing.JTable jtbInventario;
     private javax.swing.JLabel lblCambio;
+    private javax.swing.JLabel lblEfectivo;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblTarjeta;
     private javax.swing.JLabel lblTotal;
+    private javax.swing.JLabel lblTotalFinal;
+    private javax.swing.JLabel lblTransfer;
     private javax.swing.JScrollPane sclItems;
     public static javax.swing.JScrollPane scrollInventario;
     public static javax.swing.JScrollPane scrollInventario1;
+    private javax.swing.JSpinner spFecha;
     private javax.swing.JSpinner spnCantidadCarrito;
     private javax.swing.JTextField txtCatConsul;
     private javax.swing.JTextField txtCategoria;
@@ -1424,6 +1616,99 @@ public class MenuInicio extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println("Error cargar productos " + e);
         }
+    }
+
+    private void generarCorte(Date fecha) {
+
+        double totalGeneral = 0.0;
+        double efectivo = 0.0;
+        double tarjeta = 0.0;
+        double transferencia = 0.0;
+
+        try (Connection cn = Conexion.conectar()) {
+
+            // Total general
+            String sqlTotal = "SELECT SUM(total) AS totalDia FROM tb_ventasCabecera WHERE DATE(hora) = ?";
+
+            PreparedStatement psTotal = cn.prepareStatement(sqlTotal);
+            psTotal.setDate(1, new java.sql.Date(fecha.getTime()));
+            ResultSet rsTotal = psTotal.executeQuery();
+
+            if (rsTotal.next()) {
+                totalGeneral = rsTotal.getDouble("totalDia");
+            }
+
+            // Totales por forma de pago
+            String sqlForma = "SELECT formaPago, SUM(total) AS total FROM tb_ventasCabecera WHERE DATE(hora) = ? GROUP BY formaPago";
+
+            PreparedStatement psForma = cn.prepareStatement(sqlForma);
+            psForma.setDate(1, new java.sql.Date(fecha.getTime()));
+            ResultSet rsForma = psForma.executeQuery();
+
+            while (rsForma.next()) {
+
+                String forma = rsForma.getString("formaPago").toLowerCase();
+                double monto = rsForma.getDouble("total");
+
+                if (forma.equals("efectivo")) {
+                    efectivo = monto;
+                } else if (forma.equals("tarjeta")) {
+                    tarjeta = monto;
+                } else if (forma.equals("transferencia")) {
+                    transferencia = monto;
+                }
+            }
+
+            // Mostrar resultados
+            lblTotalFinal.setText(String.valueOf(totalGeneral));
+            lblEfectivo.setText(String.valueOf(efectivo));
+            lblTarjeta.setText(String.valueOf(tarjeta));
+            lblTransfer.setText(String.valueOf(transferencia));
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al generar corte");
+            System.out.println(e);
+        }
+    }
+
+    private void generarPDF(Date fecha) {
+
+        Document documento = new Document();
+
+        try {
+            PdfWriter.getInstance(
+                    documento,
+                    new FileOutputStream("CorteCaja" + fecha + ".pdf")
+            );
+
+            documento.open();
+
+            documento.add(new Paragraph("CORTE DE CAJA"));
+            documento.add(new Paragraph("Fecha: " + fecha));
+            documento.add(new Paragraph(" "));
+
+            documento.add(new Paragraph("Total general: " + lblTotalFinal.getText()));
+            documento.add(new Paragraph("Efectivo: " + lblEfectivo.getText()));
+            documento.add(new Paragraph("Tarjeta: " + lblTarjeta.getText()));
+            documento.add(new Paragraph("Transferencia: " + lblTransfer.getText()));
+
+            documento.close();
+
+            JOptionPane.showMessageDialog(this, "PDF generado correctamente");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al generar PDF");
+            System.out.println(e);
+        }
+    }
+
+    private void configurarSpinnerFecha() {
+        SpinnerDateModel modeloFecha = new SpinnerDateModel();
+        spFecha.setModel(modeloFecha);
+
+        JSpinner.DateEditor editor
+                = new JSpinner.DateEditor(spFecha, "yyyy-MM-dd");
+        spFecha.setEditor(editor);
     }
 
 }
