@@ -63,7 +63,6 @@ public class Login extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 0));
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setIconImage(getIconImage());
-        setMaximumSize(new java.awt.Dimension(700, 500));
         setMinimumSize(new java.awt.Dimension(700, 500));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -320,22 +319,31 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 
-    private void Login() {
-        if (!txtUser.getText().isEmpty() && !txtPsswrd.getText().isEmpty()) {
-            ctrlUsuario controlUsuario = new ctrlUsuario();
-            Usuario usuario = new Usuario();
-            MenuInicio mn = new MenuInicio();
-            usuario.setNombre(txtUser.getText().trim());
-            usuario.setPsswrd(txtPsswrd.getText().trim());
-            if (controlUsuario.LoginUser(usuario)) {
-                JOptionPane.showMessageDialog(null, "Inicio de sesion correcto");
-                this.setVisible(false);
-                mn.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
-            }
+   private void Login() {
+
+    if (!txtUser.getText().isEmpty() && !txtPsswrd.getText().isEmpty()) {
+
+        ctrlUsuario controlUsuario = new ctrlUsuario();
+        Usuario usuario = new Usuario();
+
+        usuario.setNombre(txtUser.getText().trim());
+        usuario.setPsswrd(txtPsswrd.getText().trim());
+
+        int idUsuario = controlUsuario.LoginUser(usuario);
+
+        if (idUsuario > 0) {
+            JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
+
+            MenuInicio mn = new MenuInicio(idUsuario);
+            mn.setVisible(true);
+            this.dispose();
+
         } else {
-            JOptionPane.showMessageDialog(null, "Ingrese sus credenciales");
+            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta");
         }
+
+    } else {
+        JOptionPane.showMessageDialog(null, "Ingrese sus credenciales");
     }
+}
 }

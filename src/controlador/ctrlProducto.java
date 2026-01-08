@@ -155,38 +155,37 @@ public class ctrlProducto {
 
     public void consultaProductos(JTable tabla, String texto) {
 
-    DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-    model.setRowCount(0); // limpiar tabla
+        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        model.setRowCount(0); // limpiar tabla
 
-    String sql = "SELECT idItem, descripcion, stock, stock_min, costo, p_venta, categoria, estado"
-            + "FROM tb_Inventario WHERE descripcion LIKE ? OR categoria LIKE ?";
-    
+        String sql = "SELECT idItem, descripcion, stock, stock_min, costo, p_venta, categoria, estado"
+                + "FROM tb_Inventario WHERE descripcion LIKE ? OR categoria LIKE ?";
 
-    try (Connection cn = Conexion.conectar();
-         PreparedStatement ps = cn.prepareStatement(sql)) {
+        try (Connection cn = Conexion.conectar();
+                PreparedStatement ps = cn.prepareStatement(sql)) {
 
-        ps.setString(1, "%" + texto + "%");
-        ps.setString(2, "%" + texto + "%");
+            ps.setString(1, "%" + texto + "%");
+            ps.setString(2, "%" + texto + "%");
 
-        ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
-        while (rs.next()) {
-            model.addRow(new Object[]{
-                rs.getInt("idItem"),
-                rs.getString("descripcion"),
-                rs.getInt("stock"),
-                rs.getInt("stock_min"),
-                rs.getDouble("costo"),
-                rs.getDouble("p_venta"),
-                rs.getString("categoria"),
-                rs.getBoolean("estado")
-            });
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getInt("idItem"),
+                    rs.getString("descripcion"),
+                    rs.getInt("stock"),
+                    rs.getInt("stock_min"),
+                    rs.getDouble("costo"),
+                    rs.getDouble("p_venta"),
+                    rs.getString("categoria"),
+                    rs.getBoolean("estado")
+                });
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al buscar: " + e.getMessage());
         }
-
-    } catch (SQLException e) {
-        System.out.println("Error al buscar: " + e.getMessage());
     }
-}
 
     public void buscarProductos(JTable tabla, String texto) {
 
@@ -229,6 +228,32 @@ public class ctrlProducto {
         } catch (SQLException e) {
             System.out.println("Error al buscar: " + e);
         }
+    }
+
+    public Producto buscarPorDescripcion(String descripcion) {
+
+        Producto producto = null;
+        String sql = "SELECT idItem, descripcion, p_venta, stock FROM tb_Inventario WHERE descripcion =  ? AND  estado = 1";
+
+    try (Connection cn = Conexion.conectar();
+                PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setString(1, descripcion);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                producto = new Producto();
+                producto.setIdItem(rs.getInt("idItem"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setpVenta(rs.getDouble("p_venta"));
+                producto.setStock(rs.getInt("stock"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error buscar producto " + e);
+        }
+
+        return producto;
     }
 
 }

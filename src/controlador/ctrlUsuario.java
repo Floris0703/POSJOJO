@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,26 +21,28 @@ import modelo.Usuario;
 public class ctrlUsuario {
 
     //metodo para iniciar sesion
-    public boolean LoginUser(Usuario objeto) {
-        boolean respuesta = false;
-        Connection cn = conexion.Conexion.conectar();
-        String sql = "SELECT 1 FROM tb_Usuario WHERE nombre = ? AND pssword = ?";
-        Statement st;
-        try {
-            PreparedStatement ps = cn.prepareStatement(sql);
+    public int LoginUser(Usuario objeto) {
+
+        int idUsuario = 0;
+        Connection cn = Conexion.conectar();
+
+        String sql = "SELECT idUsuario FROM tb_Usuario WHERE nombre =  ? AND  pssword = ? ";
+
+    try (PreparedStatement ps = cn.prepareStatement(sql)) {
+
             ps.setString(1, objeto.getNombre());
             ps.setString(2, objeto.getPsswrd());
+
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                respuesta = true;
+                idUsuario = rs.getInt("idUsuario");
             }
 
         } catch (SQLException e) {
-            System.out.println("Error al iniciar sesion");
-            JOptionPane.showMessageDialog(null, "Error al iniciar sesion");
+            System.out.println("Error login " + e);
         }
-        return respuesta;
-    }
 
+        return idUsuario;
+    }
 }

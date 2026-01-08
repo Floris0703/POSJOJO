@@ -27,7 +27,7 @@ public class CabeceraVentas {
     private boolean estado;
     private int idUsuario;
 
-    public CabeceraVentas(int idCabecera, double total, String formaPago, LocalDateTime hora, boolean estado, int idUsuario) {
+    public CabeceraVentas() {
         this.idCabecera = 0;
         this.total = 0.0;
         this.formaPago = "";
