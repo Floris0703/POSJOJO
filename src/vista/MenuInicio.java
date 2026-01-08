@@ -5,9 +5,6 @@
  */
 package vista;
 
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.pdf.PdfWriter;
 import conexion.Conexion;
 import controlador.ctrlCorte;
 import controlador.ctrlProducto;
@@ -15,9 +12,8 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.FileOutputStream;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,14 +22,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.UndoableEditListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Element;
-import javax.swing.text.Position;
-import javax.swing.text.Segment;
 import modelo.Carrito;
 import modelo.Corte;
 import modelo.Producto;
@@ -1364,7 +1353,8 @@ public class MenuInicio extends javax.swing.JFrame {
 
     private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
         // TODO add your handling code here:
-        Date fechaSpinner = (Date) spFecha.getValue();
+        java.util.Date fechaSpinner = (java.util.Date) spFecha.getValue();
+
 
         ctrlCorte ctrl = new ctrlCorte();
         ctrl.generarCorteCaja(fechaSpinner);
@@ -1373,7 +1363,8 @@ public class MenuInicio extends javax.swing.JFrame {
 
     private void btnCorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorteActionPerformed
         // TODO add your handling code here:
-        Date fechaSpinner = (Date) spFecha.getValue();
+        java.util.Date fechaSpinner = (java.util.Date) spFecha.getValue();
+
 
         ctrlCorte ctrl = new ctrlCorte();
         Corte totales = ctrl.obtenerTotales(fechaSpinner);
@@ -1382,7 +1373,7 @@ public class MenuInicio extends javax.swing.JFrame {
         lblTarjeta.setText(String.valueOf(totales.getTarjeta()));
         lblTransfer.setText(String.valueOf(totales.getTransferencia()));
         lblTotalFinal.setText(String.valueOf(totales.getTotalGeneral()));
-    
+
     }//GEN-LAST:event_btnCorteActionPerformed
 
 
@@ -1615,90 +1606,6 @@ public class MenuInicio extends javax.swing.JFrame {
 
         } catch (SQLException e) {
             System.out.println("Error cargar productos " + e);
-        }
-    }
-
-    private void generarCorte(Date fecha) {
-
-        double totalGeneral = 0.0;
-        double efectivo = 0.0;
-        double tarjeta = 0.0;
-        double transferencia = 0.0;
-
-        try (Connection cn = Conexion.conectar()) {
-
-            // Total general
-            String sqlTotal = "SELECT SUM(total) AS totalDia FROM tb_ventasCabecera WHERE DATE(hora) = ?";
-
-            PreparedStatement psTotal = cn.prepareStatement(sqlTotal);
-            psTotal.setDate(1, new java.sql.Date(fecha.getTime()));
-            ResultSet rsTotal = psTotal.executeQuery();
-
-            if (rsTotal.next()) {
-                totalGeneral = rsTotal.getDouble("totalDia");
-            }
-
-            // Totales por forma de pago
-            String sqlForma = "SELECT formaPago, SUM(total) AS total FROM tb_ventasCabecera WHERE DATE(hora) = ? GROUP BY formaPago";
-
-            PreparedStatement psForma = cn.prepareStatement(sqlForma);
-            psForma.setDate(1, new java.sql.Date(fecha.getTime()));
-            ResultSet rsForma = psForma.executeQuery();
-
-            while (rsForma.next()) {
-
-                String forma = rsForma.getString("formaPago").toLowerCase();
-                double monto = rsForma.getDouble("total");
-
-                if (forma.equals("efectivo")) {
-                    efectivo = monto;
-                } else if (forma.equals("tarjeta")) {
-                    tarjeta = monto;
-                } else if (forma.equals("transferencia")) {
-                    transferencia = monto;
-                }
-            }
-
-            // Mostrar resultados
-            lblTotalFinal.setText(String.valueOf(totalGeneral));
-            lblEfectivo.setText(String.valueOf(efectivo));
-            lblTarjeta.setText(String.valueOf(tarjeta));
-            lblTransfer.setText(String.valueOf(transferencia));
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error al generar corte");
-            System.out.println(e);
-        }
-    }
-
-    private void generarPDF(Date fecha) {
-
-        Document documento = new Document();
-
-        try {
-            PdfWriter.getInstance(
-                    documento,
-                    new FileOutputStream("CorteCaja" + fecha + ".pdf")
-            );
-
-            documento.open();
-
-            documento.add(new Paragraph("CORTE DE CAJA"));
-            documento.add(new Paragraph("Fecha: " + fecha));
-            documento.add(new Paragraph(" "));
-
-            documento.add(new Paragraph("Total general: " + lblTotalFinal.getText()));
-            documento.add(new Paragraph("Efectivo: " + lblEfectivo.getText()));
-            documento.add(new Paragraph("Tarjeta: " + lblTarjeta.getText()));
-            documento.add(new Paragraph("Transferencia: " + lblTransfer.getText()));
-
-            documento.close();
-
-            JOptionPane.showMessageDialog(this, "PDF generado correctamente");
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al generar PDF");
-            System.out.println(e);
         }
     }
 

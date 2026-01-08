@@ -9,9 +9,10 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import conexion.Conexion;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,6 +20,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import javax.swing.JOptionPane;
 import modelo.Corte;
 
 /**
@@ -27,7 +29,7 @@ import modelo.Corte;
  */
 public class ctrlCorte {
 
-    public void generarCorteCaja(Date fechaSpinner) {
+    public void generarCorteCaja(java.util.Date fechaSpinner) {
 
         // 1. Obtener totales (UNA sola vez)
         Corte totales = obtenerTotales(fechaSpinner);
@@ -41,7 +43,7 @@ public class ctrlCorte {
         generarPDF(fecha, totales);
     }
 
-    public Corte obtenerTotales(Date fechaSpinner) {
+    public Corte obtenerTotales(java.util.Date fechaSpinner) {
 
         Corte totales = new Corte();
 
@@ -99,8 +101,14 @@ public class ctrlCorte {
 
         try {
             Document doc = new Document();
-            PdfWriter.getInstance(doc,
-                    new FileOutputStream("Corte_" + fecha + ".pdf"));
+            String ruta = System.getProperty("user.home")
+                    + File.separator + "OneDrive"
+                    + File.separator + "Escritorio"
+                    + File.separator + "Corte_" + fecha + ".pdf";
+
+            //C:\Users\kevin\OneDrive\Escritorio
+            PdfWriter.getInstance(doc, new FileOutputStream(ruta));
+            JOptionPane.showMessageDialog(null, "Generando PDF en: " + ruta);
 
             doc.open();
 
@@ -114,9 +122,12 @@ public class ctrlCorte {
             doc.add(new Paragraph("Total general: " + totales.getTotalGeneral()));
 
             doc.close();
+            Desktop.getDesktop().open(new File(ruta));
 
         } catch (Exception e) {
-            System.out.println("Error al generar PDF: " + e);
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                    "Error al generar PDF:\n" + e.getMessage());
         }
     }
 
