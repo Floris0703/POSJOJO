@@ -16,7 +16,7 @@ import modelo.Usuario;
 
 /**
  *
- * @author kevin
+ * @author kevin token git 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
  */
 public class Login extends javax.swing.JFrame {
 
@@ -84,6 +84,17 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpnExitBtn.setBackground(new java.awt.Color(0, 0, 0));
+        jpnExitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpnExitBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jpnExitBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jpnExitBtnMouseExited(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,19 +115,19 @@ public class Login extends javax.swing.JFrame {
         jpnExitBtn.setLayout(jpnExitBtnLayout);
         jpnExitBtnLayout.setHorizontalGroup(
             jpnExitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnExitBtnLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+            .addGroup(jpnExitBtnLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel10)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnExitBtnLayout.setVerticalGroup(
             jpnExitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnExitBtnLayout.createSequentialGroup()
-                .addGap(0, 7, Short.MAX_VALUE)
-                .addComponent(jLabel10))
+            .addGroup(jpnExitBtnLayout.createSequentialGroup()
+                .addComponent(jLabel10)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jpnExitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 40, 40));
+        jPanel1.add(jpnExitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 30, 30));
 
         lblPsswrd.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         lblPsswrd.setForeground(new java.awt.Color(255, 255, 255));
@@ -286,6 +297,23 @@ public class Login extends javax.swing.JFrame {
         this.setBackground(Color.black);
         this.setForeground(Color.white);
     }//GEN-LAST:event_jLabel10MouseExited
+
+    private void jpnExitBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExitBtnMouseEntered
+        // TODO add your handling code here:
+        this.setBackground(Color.red);
+        this.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jpnExitBtnMouseEntered
+
+    private void jpnExitBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExitBtnMouseExited
+        // TODO add your handling code here:
+        this.setBackground(Color.black);
+        this.setForeground(Color.white);
+    }//GEN-LAST:event_jpnExitBtnMouseExited
+
+    private void jpnExitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExitBtnMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jpnExitBtnMouseClicked
 
     /**
      * @param args the command line arguments
