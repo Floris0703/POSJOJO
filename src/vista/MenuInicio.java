@@ -50,6 +50,8 @@ public class MenuInicio extends javax.swing.JFrame {
         this.configurarTabla();
         this.idUsuarioSesion = idUsuario;
         this.configurarComboProductos();
+        btnUsuario.setVisible(false);
+        btnEstadisticas.setVisible(false);
     }
 
     @Override

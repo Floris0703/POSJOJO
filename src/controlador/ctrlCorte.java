@@ -7,6 +7,7 @@ package controlador;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import conexion.Conexion;
 import java.awt.Desktop;
@@ -20,8 +21,12 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.Corte;
+import modelo.DetalleCorte;
 
 /**
  *
@@ -120,7 +125,31 @@ public class ctrlCorte {
             doc.add(new Paragraph("Tarjeta: " + totales.getTarjeta()));
             doc.add(new Paragraph("Transferencia: " + totales.getTransferencia()));
             doc.add(new Paragraph("Total general: " + totales.getTotalGeneral()));
+            doc.add(new Paragraph(" "));
+            doc.add(new Paragraph("DETALLE DE VENTAS"));
+            doc.add(new Paragraph(" "));
+            /*
+            
+            
+            List<DetalleCorte> detalle = obtenerDetalleVentas(
+                    java.sql.Date.valueOf(fecha)
+            );
 
+            PdfPTable tabla = new PdfPTable(3);
+            tabla.setWidthPercentage(100);
+
+            tabla.addCell("Producto");
+            tabla.addCell("Cantidad");
+            tabla.addCell("Total");
+
+            for (DetalleCorte d : detalle) {
+                tabla.addCell(d.getDescripcion());
+                tabla.addCell(String.valueOf(d.getCantidad()));
+                tabla.addCell(String.valueOf(d.getTotal()));
+            }
+
+            doc.add(tabla);
+             */
             doc.close();
             Desktop.getDesktop().open(new File(ruta));
 
@@ -129,6 +158,47 @@ public class ctrlCorte {
             JOptionPane.showMessageDialog(null,
                     "Error al generar PDF:\n" + e.getMessage());
         }
+    }
+
+    private List<DetalleCorte> obtenerDetalleVentas(Date fechaSpinner) {
+
+        List<DetalleCorte> lista = new ArrayList<>();
+
+        LocalDate fecha = fechaSpinner.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+
+        Timestamp inicio = Timestamp.valueOf(fecha.atStartOfDay());
+        Timestamp fin = Timestamp.valueOf(fecha.atTime(23, 59, 59));
+
+        String sql = "SELECT i.descripcion,"
+                + " SUM(d.cantidad) AS cantidad,"
+                + "SUM(d.cantidad * d.precioU) AS total"
+                + "FROM tb_ventasDetalle d JOIN tb_ventasCabecera c ON d.idCabeceraVenta = c.idCabeceraVenta"
+                + "JOIN tb_Inventario i ON d.idProducto = i.idItem"
+                + "WHERE c.hora BETWEEN ? AND ? GROUP  BY i.descripcion ORDER BY i.descripcion";
+
+        try (Connection cn = Conexion.conectar();
+                PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setTimestamp(1, inicio);
+            ps.setTimestamp(2, fin);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                lista.add(new DetalleCorte(
+                        rs.getString("descripcion"),
+                        rs.getInt("cantidad"),
+                        rs.getDouble("total")
+                ));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error detalle corte: " + e);
+        }
+
+        return lista;
     }
 
 }
