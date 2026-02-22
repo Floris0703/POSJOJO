@@ -85,14 +85,8 @@ public class Login extends javax.swing.JFrame {
 
         jpnExitBtn.setBackground(new java.awt.Color(0, 0, 0));
         jpnExitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jpnExitBtnMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jpnExitBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jpnExitBtnMouseExited(evt);
             }
         });
 
@@ -303,17 +297,6 @@ public class Login extends javax.swing.JFrame {
         this.setBackground(Color.red);
         this.setForeground(Color.BLACK);
     }//GEN-LAST:event_jpnExitBtnMouseEntered
-
-    private void jpnExitBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExitBtnMouseExited
-        // TODO add your handling code here:
-        this.setBackground(Color.black);
-        this.setForeground(Color.white);
-    }//GEN-LAST:event_jpnExitBtnMouseExited
-
-    private void jpnExitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExitBtnMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jpnExitBtnMouseClicked
 
     /**
      * @param args the command line arguments

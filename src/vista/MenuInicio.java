@@ -8,12 +8,12 @@ package vista;
 import conexion.Conexion;
 import controlador.ctrlCorte;
 import controlador.ctrlProducto;
+import controlador.ctrlUsuario;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Carrito;
 import modelo.Corte;
 import modelo.Producto;
+import modelo.Usuario;
 
 /**
  *
@@ -38,6 +39,7 @@ public class MenuInicio extends javax.swing.JFrame {
      */
     private int idItem;
     ctrlProducto control = new ctrlProducto();
+    ctrlUsuario controlU = new ctrlUsuario();
     ArrayList<Carrito> carrito = new ArrayList<>();
     DefaultTableModel modeloCarrito;
     double totalVenta = 0;
@@ -72,6 +74,11 @@ public class MenuInicio extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jButton4 = new javax.swing.JButton();
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
         jpnInicio = new javax.swing.JPanel();
         jpnMenu = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
@@ -96,11 +103,11 @@ public class MenuInicio extends javax.swing.JFrame {
         jpnCardInicial = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jpnVentas = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        lblAgregar = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        btnEditarCarrito = new javax.swing.JButton();
-        btnAgregarCarrito = new javax.swing.JButton();
         sclItems = new javax.swing.JScrollPane();
         jtbCarrito = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
@@ -110,16 +117,20 @@ public class MenuInicio extends javax.swing.JFrame {
         txtRecib = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         lblCambio = new javax.swing.JLabel();
-        btnCalcular = new javax.swing.JButton();
         cbbForPago = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
-        btnFinVenta = new javax.swing.JButton();
-        btnEliminarItem = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        lblCambioB = new javax.swing.JLabel();
         spnCantidadCarrito = new javax.swing.JSpinner();
         cmbProductos = new javax.swing.JComboBox<>();
+        jPanel11 = new javax.swing.JPanel();
+        lblEliminar = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        lblEditar = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        lblFin = new javax.swing.JLabel();
         jpnProducto = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnGuardarProd = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -133,19 +144,30 @@ public class MenuInicio extends javax.swing.JFrame {
         txtpVenta = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel42 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
+        jSeparator9 = new javax.swing.JSeparator();
+        jSeparator10 = new javax.swing.JSeparator();
+        jSeparator11 = new javax.swing.JSeparator();
         jpnConsulta = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        lblBuscarBtn = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         IdItem = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtCatConsul = new javax.swing.JTextField();
         txtDesConsul = new javax.swing.JTextField();
-        btnConsul = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         scrollInventario1 = new javax.swing.JScrollPane();
         jtbConsulta = new javax.swing.JTable();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
         jpnReporte = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        btnPDF = new javax.swing.JButton();
         lblTotalFinal = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         lblEfectivo = new javax.swing.JLabel();
@@ -156,8 +178,34 @@ public class MenuInicio extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         spFecha = new javax.swing.JSpinner();
-        btnCorte = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        lblCorte = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        lblPDF = new javax.swing.JLabel();
         jpnUsuario = new javax.swing.JPanel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        lblRegistrar = new javax.swing.JPanel();
+        jLabel36 = new javax.swing.JLabel();
+        lblVerUsuarios = new javax.swing.JPanel();
+        jLabel37 = new javax.swing.JLabel();
+        jpnVerUsuario = new javax.swing.JPanel();
+        jpnRegistrar = new javax.swing.JPanel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        txtPsswrd = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        txtUsuario = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel39 = new javax.swing.JLabel();
+        cbbRol = new javax.swing.JComboBox<>();
+        jpnGuardarU = new javax.swing.JPanel();
+        jLabel40 = new javax.swing.JLabel();
+        jpnVerUsuarios = new javax.swing.JPanel();
+        btnEliminarUsuario = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
+        scrollInventario2 = new javax.swing.JScrollPane();
+        jtbUsuarios = new javax.swing.JTable();
         jpnEstadisticas = new javax.swing.JPanel();
         jpnInventario = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -165,13 +213,27 @@ public class MenuInicio extends javax.swing.JFrame {
         scrollInventario = new javax.swing.JScrollPane();
         jtbInventario = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        btnBorrar = new javax.swing.JButton();
-        btnBuscarProd = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnMostrar = new javax.swing.JButton();
+        lblMostrar = new javax.swing.JPanel();
+        lblMos = new javax.swing.JLabel();
+        lblEditarbtn = new javax.swing.JPanel();
+        lblEd = new javax.swing.JLabel();
+        lblBorrar = new javax.swing.JPanel();
+        lblBorr = new javax.swing.JLabel();
+        lblBuscar = new javax.swing.JPanel();
+        lblBusc = new javax.swing.JLabel();
 
         jButton4.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jButton4.setText("Agregar");
+
+        jMenu1.setText("jMenu1");
+
+        jMenu2.setText("jMenu2");
+
+        jMenu5.setText("File");
+        jMenuBar2.add(jMenu5);
+
+        jMenu6.setText("Edit");
+        jMenuBar2.add(jMenu6);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -379,20 +441,36 @@ public class MenuInicio extends javax.swing.JFrame {
             .addGroup(jpnCardInicialLayout.createSequentialGroup()
                 .addGap(312, 312, 312)
                 .addComponent(jLabel3)
-                .addContainerGap(395, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnCardInicialLayout.setVerticalGroup(
             jpnCardInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnCardInicialLayout.createSequentialGroup()
                 .addGap(193, 193, 193)
                 .addComponent(jLabel3)
-                .addContainerGap(354, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpnCuerpo.add(jpnCardInicial, "Inicio");
 
         jpnVentas.setBackground(new java.awt.Color(0, 0, 0));
         jpnVentas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel8.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblAgregar.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        lblAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        lblAgregar.setText("      Agregar");
+        lblAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAgregarMouseClicked(evt);
+            }
+        });
+        jPanel8.add(lblAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 40));
+
+        jpnVentas.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 120, 40));
 
         jLabel15.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -409,23 +487,10 @@ public class MenuInicio extends javax.swing.JFrame {
         jLabel17.setText("Cantidad");
         jpnVentas.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(362, 73, -1, 22));
 
-        btnEditarCarrito.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
-        btnEditarCarrito.setText("Editar");
-        btnEditarCarrito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarCarritoActionPerformed(evt);
-            }
-        });
-        jpnVentas.add(btnEditarCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, -1, -1));
-
-        btnAgregarCarrito.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
-        btnAgregarCarrito.setText("Agregar");
-        btnAgregarCarrito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarCarritoActionPerformed(evt);
-            }
-        });
-        jpnVentas.add(btnAgregarCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 70, -1, -1));
+        sclItems.setBackground(new java.awt.Color(0, 0, 0));
+        sclItems.setBorder(null);
+        sclItems.setForeground(new java.awt.Color(255, 255, 255));
+        sclItems.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
 
         jtbCarrito.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -442,7 +507,8 @@ public class MenuInicio extends javax.swing.JFrame {
 
         jpnVentas.add(sclItems, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 610, 390));
 
-        jPanel9.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel9.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel20.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
@@ -456,7 +522,9 @@ public class MenuInicio extends javax.swing.JFrame {
         lblTotal.setForeground(new java.awt.Color(255, 255, 255));
         lblTotal.setText("0.00");
 
-        txtRecib.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
+        txtRecib.setBackground(new java.awt.Color(0, 0, 0));
+        txtRecib.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        txtRecib.setForeground(new java.awt.Color(255, 255, 255));
         txtRecib.setText("0.00");
         txtRecib.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -472,20 +540,33 @@ public class MenuInicio extends javax.swing.JFrame {
         lblCambio.setForeground(new java.awt.Color(255, 255, 255));
         lblCambio.setText("0.00");
 
-        btnCalcular.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
-        btnCalcular.setText("Cambio");
-        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
+        cbbForPago.setBackground(new java.awt.Color(0, 0, 0));
+        cbbForPago.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        cbbForPago.setForeground(new java.awt.Color(255, 255, 255));
+        cbbForPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Transferencia", "Tarjeta" }));
+        cbbForPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCalcularActionPerformed(evt);
+                cbbForPagoActionPerformed(evt);
             }
         });
-
-        cbbForPago.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
-        cbbForPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Transferencia", "Tarjeta" }));
 
         jLabel21.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Forma de pago");
+
+        jPanel10.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblCambioB.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        lblCambioB.setForeground(new java.awt.Color(255, 255, 255));
+        lblCambioB.setText(" Cambio");
+        lblCambioB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCambioBMouseClicked(evt);
+            }
+        });
+        jPanel10.add(lblCambioB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 40));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -496,20 +577,22 @@ public class MenuInicio extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel23)
                             .addComponent(jLabel22)
                             .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtRecib, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)))
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(btnCalcular)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21)
-                            .addComponent(cbbForPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cbbForPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21)))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRecib, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -521,44 +604,80 @@ public class MenuInicio extends javax.swing.JFrame {
                     .addComponent(lblTotal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(txtRecib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtRecib, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
+                .addGap(14, 14, 14)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(lblCambio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel21)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCalcular)
-                    .addComponent(cbbForPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbbForPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jpnVentas.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(649, 217, -1, -1));
+        jpnVentas.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 220, 230, -1));
 
-        btnFinVenta.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
-        btnFinVenta.setText("Finalizar");
-        btnFinVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFinVentaActionPerformed(evt);
-            }
-        });
-        jpnVentas.add(btnFinVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 430, -1, -1));
-
-        btnEliminarItem.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
-        btnEliminarItem.setText("Eliminar");
-        btnEliminarItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarItemActionPerformed(evt);
-            }
-        });
-        jpnVentas.add(btnEliminarItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 180, -1, -1));
+        spnCantidadCarrito.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
         jpnVentas.add(spnCantidadCarrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, -1, -1));
 
+        cmbProductos.setBackground(new java.awt.Color(0, 0, 0));
         cmbProductos.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        cmbProductos.setForeground(new java.awt.Color(255, 255, 255));
+        cmbProductos.setBorder(null);
         jpnVentas.add(cmbProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 240, -1));
+
+        jPanel11.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblEliminar.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        lblEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        lblEliminar.setText("     Eliminar");
+        lblEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEliminarMouseClicked(evt);
+            }
+        });
+        jPanel11.add(lblEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 40));
+
+        jpnVentas.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 120, 40));
+
+        jPanel12.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblEditar.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        lblEditar.setForeground(new java.awt.Color(255, 255, 255));
+        lblEditar.setText("         Editar");
+        lblEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEditarMouseClicked(evt);
+            }
+        });
+        jPanel12.add(lblEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 40));
+
+        jpnVentas.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 110, 120, 40));
+
+        jPanel13.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblFin.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        lblFin.setForeground(new java.awt.Color(255, 255, 255));
+        lblFin.setText("     Finalizar");
+        lblFin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblFinMouseClicked(evt);
+            }
+        });
+        jPanel13.add(lblFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 110, 40));
+
+        jpnVentas.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 460, 120, 40));
 
         jpnCuerpo.add(jpnVentas, "Ventas");
 
@@ -568,97 +687,148 @@ public class MenuInicio extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Descripción:");
-        jpnProducto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 129, -1, -1));
-
-        btnGuardarProd.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
-        btnGuardarProd.setText("Guardar");
-        btnGuardarProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarProdActionPerformed(evt);
-            }
-        });
-        jpnProducto.add(btnGuardarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 540, -1, -1));
+        jpnProducto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Microsoft JhengHei", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Producto");
-        jpnProducto.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 64, -1, -1));
+        jpnProducto.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Stock:");
-        jpnProducto.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+        jpnProducto.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Stock Min:");
-        jpnProducto.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
+        jpnProducto.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Costo:");
-        jpnProducto.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
+        jpnProducto.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Precio de venta:");
-        jpnProducto.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
+        jpnProducto.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Categoría:");
-        jpnProducto.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, -1));
+        jpnProducto.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, -1));
 
+        txtCosto.setBackground(new java.awt.Color(0, 0, 0));
         txtCosto.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        txtCosto.setForeground(new java.awt.Color(255, 255, 255));
+        txtCosto.setBorder(null);
         txtCosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCostoActionPerformed(evt);
             }
         });
-        jpnProducto.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 410, -1));
+        jpnProducto.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 410, 30));
 
+        txtStockMin.setBackground(new java.awt.Color(0, 0, 0));
         txtStockMin.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        txtStockMin.setForeground(new java.awt.Color(255, 255, 255));
+        txtStockMin.setBorder(null);
         txtStockMin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStockMinActionPerformed(evt);
             }
         });
-        jpnProducto.add(txtStockMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 410, -1));
+        jpnProducto.add(txtStockMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 410, 30));
 
+        txtStock.setBackground(new java.awt.Color(0, 0, 0));
         txtStock.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        txtStock.setForeground(new java.awt.Color(255, 255, 255));
+        txtStock.setBorder(null);
         txtStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStockActionPerformed(evt);
             }
         });
-        jpnProducto.add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 410, -1));
+        jpnProducto.add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 410, 30));
 
+        txtCategoria.setBackground(new java.awt.Color(0, 0, 0));
         txtCategoria.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        txtCategoria.setForeground(new java.awt.Color(255, 255, 255));
+        txtCategoria.setBorder(null);
         txtCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCategoriaActionPerformed(evt);
             }
         });
-        jpnProducto.add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 490, 410, -1));
+        jpnProducto.add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 410, 30));
 
+        txtpVenta.setBackground(new java.awt.Color(0, 0, 0));
         txtpVenta.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        txtpVenta.setForeground(new java.awt.Color(255, 255, 255));
+        txtpVenta.setBorder(null);
         txtpVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtpVentaActionPerformed(evt);
             }
         });
-        jpnProducto.add(txtpVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, 410, -1));
+        jpnProducto.add(txtpVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 410, 30));
 
+        jScrollPane1.setBorder(null);
+
+        txtDescripcion.setBackground(new java.awt.Color(0, 0, 0));
         txtDescripcion.setColumns(20);
+        txtDescripcion.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        txtDescripcion.setForeground(new java.awt.Color(255, 255, 255));
         txtDescripcion.setRows(5);
+        txtDescripcion.setBorder(null);
         jScrollPane1.setViewportView(txtDescripcion);
 
-        jpnProducto.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 129, 460, -1));
+        jpnProducto.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 460, -1));
+
+        jPanel7.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel42.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel42.setText("         Guardar");
+        jLabel42.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel42MouseClicked(evt);
+            }
+        });
+        jPanel7.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 40));
+
+        jpnProducto.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, 120, 40));
+        jpnProducto.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 212, 500, 10));
+        jpnProducto.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 500, -1));
+        jpnProducto.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 342, 500, 0));
+        jpnProducto.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 500, -1));
+        jpnProducto.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 402, 500, 10));
+        jpnProducto.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 462, 500, 10));
+        jpnProducto.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 522, 500, 10));
 
         jpnCuerpo.add(jpnProducto, "Productos");
 
         jpnConsulta.setBackground(new java.awt.Color(0, 0, 0));
         jpnConsulta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel6.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblBuscarBtn.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        lblBuscarBtn.setForeground(new java.awt.Color(255, 255, 255));
+        lblBuscarBtn.setText("        Buscar");
+        lblBuscarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBuscarBtnMouseClicked(evt);
+            }
+        });
+        jPanel6.add(lblBuscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 40));
+
+        jpnConsulta.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, 120, 40));
 
         jLabel6.setFont(new java.awt.Font("Microsoft JhengHei", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -668,32 +838,32 @@ public class MenuInicio extends javax.swing.JFrame {
         IdItem.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         IdItem.setForeground(new java.awt.Color(255, 255, 255));
         IdItem.setText("Categoria");
-        jpnConsulta.add(IdItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 103, -1, -1));
+        jpnConsulta.add(IdItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, 30));
 
         jLabel9.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Descripción");
-        jpnConsulta.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 144, -1, -1));
+        jpnConsulta.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
+        txtCatConsul.setBackground(new java.awt.Color(0, 0, 0));
         txtCatConsul.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
-        jpnConsulta.add(txtCatConsul, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 103, 122, -1));
+        txtCatConsul.setForeground(new java.awt.Color(255, 255, 255));
+        txtCatConsul.setBorder(null);
+        jpnConsulta.add(txtCatConsul, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 350, 30));
 
+        txtDesConsul.setBackground(new java.awt.Color(0, 0, 0));
         txtDesConsul.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
-        jpnConsulta.add(txtDesConsul, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 144, 122, -1));
-
-        btnConsul.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
-        btnConsul.setText("Buscar");
-        btnConsul.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsulActionPerformed(evt);
-            }
-        });
-        jpnConsulta.add(btnConsul, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
+        txtDesConsul.setForeground(new java.awt.Color(255, 255, 255));
+        txtDesConsul.setBorder(null);
+        jpnConsulta.add(txtDesConsul, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 350, 30));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jtbConsulta.setBackground(new java.awt.Color(0, 0, 0));
+        jtbConsulta.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        jtbConsulta.setForeground(new java.awt.Color(255, 255, 255));
         jtbConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -710,164 +880,281 @@ public class MenuInicio extends javax.swing.JFrame {
         jPanel3.add(scrollInventario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 690, 240));
 
         jpnConsulta.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 710, 260));
+        jpnConsulta.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 122, 340, 10));
+        jpnConsulta.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 192, 350, 10));
 
         jpnCuerpo.add(jpnConsulta, "Consulta");
 
         jpnReporte.setBackground(new java.awt.Color(0, 0, 0));
+        jpnReporte.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Total:");
-
-        btnPDF.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        btnPDF.setText("PDF");
-        btnPDF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPDFActionPerformed(evt);
-            }
-        });
+        jpnReporte.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 204, -1, -1));
 
         lblTotalFinal.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
         lblTotalFinal.setForeground(new java.awt.Color(255, 255, 255));
         lblTotalFinal.setText("0.00");
+        jpnReporte.add(lblTotalFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 204, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Reporte de ventas | Corte de caja");
+        jpnReporte.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 31, -1, -1));
 
         lblEfectivo.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
         lblEfectivo.setForeground(new java.awt.Color(255, 255, 255));
         lblEfectivo.setText("0.00");
+        jpnReporte.add(lblEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 257, -1, -1));
 
         jLabel24.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Efectivo:");
+        jpnReporte.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 257, -1, -1));
 
         lblTransfer.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
         lblTransfer.setForeground(new java.awt.Color(255, 255, 255));
         lblTransfer.setText("0.00");
+        jpnReporte.add(lblTransfer, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 324, -1, -1));
 
         jLabel26.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Transferencia:");
+        jpnReporte.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 324, -1, -1));
 
         lblTarjeta.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
         lblTarjeta.setForeground(new java.awt.Color(255, 255, 255));
         lblTarjeta.setText("0.00");
+        jpnReporte.add(lblTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 376, -1, -1));
 
         jLabel28.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setText("Tarjeta:");
+        jpnReporte.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 376, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Seleccione la fecha");
+        jpnReporte.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 126, -1, -1));
 
-        spFecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        spFecha.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         spFecha.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1767850427028L), null, null, java.util.Calendar.DAY_OF_MONTH));
+        jpnReporte.add(spFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 172, -1, -1));
 
-        btnCorte.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        btnCorte.setText("Corte");
-        btnCorte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCorteActionPerformed(evt);
+        jPanel4.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblCorte.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        lblCorte.setForeground(new java.awt.Color(255, 255, 255));
+        lblCorte.setText("        Corte");
+        lblCorte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCorteMouseClicked(evt);
             }
         });
+        jPanel4.add(lblCorte, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 40));
 
-        javax.swing.GroupLayout jpnReporteLayout = new javax.swing.GroupLayout(jpnReporte);
-        jpnReporte.setLayout(jpnReporteLayout);
-        jpnReporteLayout.setHorizontalGroup(
-            jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnReporteLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnReporteLayout.createSequentialGroup()
-                        .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpnReporteLayout.createSequentialGroup()
-                                .addGap(166, 166, 166)
-                                .addComponent(lblTarjeta))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel28)
-                                    .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jpnReporteLayout.createSequentialGroup()
-                                            .addComponent(jLabel26)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lblTransfer))
-                                        .addGroup(jpnReporteLayout.createSequentialGroup()
-                                            .addComponent(jLabel24)
-                                            .addGap(91, 91, 91)
-                                            .addComponent(lblEfectivo))))
-                                .addGroup(jpnReporteLayout.createSequentialGroup()
-                                    .addComponent(jLabel13)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblTotalFinal))))
-                        .addContainerGap(641, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnReporteLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnCorte)
-                            .addComponent(btnPDF))
-                        .addGap(60, 60, 60))))
-            .addGroup(jpnReporteLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel14)
-                    .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jpnReporteLayout.createSequentialGroup()
-                    .addGap(41, 41, 41)
-                    .addComponent(jLabel18)
-                    .addContainerGap(574, Short.MAX_VALUE)))
-        );
-        jpnReporteLayout.setVerticalGroup(
-            jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnReporteLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel14)
-                    .addComponent(btnCorte))
-                .addGap(18, 18, 18)
-                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPDF))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(lblTotalFinal))
-                .addGap(28, 28, 28)
-                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEfectivo)
-                    .addComponent(jLabel24))
-                .addGap(42, 42, 42)
-                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTransfer)
-                    .addComponent(jLabel26))
-                .addGap(27, 27, 27)
-                .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTarjeta)
-                    .addComponent(jLabel28))
-                .addGap(124, 124, 124))
-            .addGroup(jpnReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jpnReporteLayout.createSequentialGroup()
-                    .addGap(31, 31, 31)
-                    .addComponent(jLabel18)
-                    .addContainerGap(544, Short.MAX_VALUE)))
-        );
+        jpnReporte.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, 120, 40));
+
+        jPanel5.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblPDF.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        lblPDF.setForeground(new java.awt.Color(255, 255, 255));
+        lblPDF.setText("          Pdf");
+        lblPDF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPDFMouseClicked(evt);
+            }
+        });
+        jPanel5.add(lblPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 40));
+
+        jpnReporte.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, 120, 40));
 
         jpnCuerpo.add(jpnReporte, "Reporte");
 
-        javax.swing.GroupLayout jpnUsuarioLayout = new javax.swing.GroupLayout(jpnUsuario);
-        jpnUsuario.setLayout(jpnUsuarioLayout);
-        jpnUsuarioLayout.setHorizontalGroup(
-            jpnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 903, Short.MAX_VALUE)
-        );
-        jpnUsuarioLayout.setVerticalGroup(
-            jpnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 596, Short.MAX_VALUE)
-        );
+        jpnUsuario.setBackground(new java.awt.Color(0, 0, 0));
+        jpnUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel33.setFont(new java.awt.Font("Microsoft JhengHei", 3, 24)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel33.setText("Registro de usuarios");
+        jpnUsuario.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 240, -1));
+
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cliente.png"))); // NOI18N
+        jpnUsuario.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 30, 50));
+
+        lblRegistrar.setBackground(new java.awt.Color(153, 153, 255));
+        lblRegistrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegistrarMouseClicked(evt);
+            }
+        });
+        lblRegistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel36.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setText("Registrar nuevo");
+        jLabel36.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel36MouseClicked(evt);
+            }
+        });
+        lblRegistrar.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jpnUsuario.add(lblRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 150, 40));
+
+        lblVerUsuarios.setBackground(new java.awt.Color(153, 153, 255));
+        lblVerUsuarios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblVerUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblVerUsuariosMouseClicked(evt);
+            }
+        });
+        lblVerUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel37.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel37.setText("Ver usuarios");
+        jLabel37.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel37MouseClicked(evt);
+            }
+        });
+        lblVerUsuarios.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jpnUsuario.add(lblVerUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 140, 40));
+
+        jpnVerUsuario.setBackground(new java.awt.Color(0, 0, 0));
+        jpnVerUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jpnRegistrar.setBackground(new java.awt.Color(0, 0, 0));
+        jpnRegistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel35.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel35.setText("Rol");
+        jpnRegistrar.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 90, -1));
+
+        jLabel38.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel38.setText("Usuario");
+        jpnRegistrar.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, -1));
+
+        txtPsswrd.setBackground(new java.awt.Color(0, 0, 0));
+        txtPsswrd.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        txtPsswrd.setForeground(new java.awt.Color(255, 255, 255));
+        txtPsswrd.setBorder(null);
+        txtPsswrd.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtPsswrd.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtPsswrd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPsswrdKeyPressed(evt);
+            }
+        });
+        jpnRegistrar.add(txtPsswrd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 330, 32));
+        jpnRegistrar.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 82, 440, 10));
+
+        txtUsuario.setBackground(new java.awt.Color(0, 0, 0));
+        txtUsuario.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        txtUsuario.setBorder(null);
+        txtUsuario.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyPressed(evt);
+            }
+        });
+        jpnRegistrar.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 330, 32));
+        jpnRegistrar.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 172, 430, 10));
+
+        jLabel39.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel39.setText("Contraseña");
+        jpnRegistrar.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 90, -1));
+
+        cbbRol.setBackground(new java.awt.Color(0, 0, 0));
+        cbbRol.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        cbbRol.setForeground(new java.awt.Color(255, 255, 255));
+        cbbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Cajero" }));
+        jpnRegistrar.add(cbbRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 260, 40));
+
+        jpnGuardarU.setBackground(new java.awt.Color(153, 153, 255));
+        jpnGuardarU.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jpnGuardarU.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpnGuardarUMouseClicked(evt);
+            }
+        });
+        jpnGuardarU.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel40.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel40.setText("Guardar");
+        jLabel40.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel40MouseClicked(evt);
+            }
+        });
+        jpnGuardarU.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        jpnRegistrar.add(jpnGuardarU, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 340, 120, 40));
+
+        jpnVerUsuario.add(jpnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 900, 430));
+
+        jpnVerUsuarios.setBackground(new java.awt.Color(0, 0, 0));
+        jpnVerUsuarios.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jpnVerUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnEliminarUsuario.setBackground(new java.awt.Color(153, 153, 255));
+        btnEliminarUsuario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEliminarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarUsuarioMouseClicked(evt);
+            }
+        });
+        btnEliminarUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel41.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel41.setText("Eliminar");
+        jLabel41.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel41MouseClicked(evt);
+            }
+        });
+        btnEliminarUsuario.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        jpnVerUsuarios.add(btnEliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 110, 40));
+
+        jtbUsuarios.setBackground(new java.awt.Color(0, 0, 0));
+        jtbUsuarios.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        jtbUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        jtbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jtbUsuarios.setGridColor(new java.awt.Color(255, 255, 255));
+        jtbUsuarios.setOpaque(false);
+        scrollInventario2.setViewportView(jtbUsuarios);
+
+        jpnVerUsuarios.add(scrollInventario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 350));
+
+        jpnVerUsuario.add(jpnVerUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 420));
+
+        jpnUsuario.add(jpnVerUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 900, 380));
 
         jpnCuerpo.add(jpnUsuario, "Usuario");
 
@@ -875,11 +1162,11 @@ public class MenuInicio extends javax.swing.JFrame {
         jpnEstadisticas.setLayout(jpnEstadisticasLayout);
         jpnEstadisticasLayout.setHorizontalGroup(
             jpnEstadisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 903, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jpnEstadisticasLayout.setVerticalGroup(
             jpnEstadisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 596, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jpnCuerpo.add(jpnEstadisticas, "Estadisticas");
@@ -889,10 +1176,13 @@ public class MenuInicio extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jtbInventario.setBackground(new java.awt.Color(0, 0, 0));
+        jtbInventario.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
+        jtbInventario.setForeground(new java.awt.Color(255, 255, 255));
         jtbInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -904,9 +1194,10 @@ public class MenuInicio extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbInventario.setGridColor(new java.awt.Color(255, 255, 255));
         scrollInventario.setViewportView(jtbInventario);
 
-        jPanel2.add(scrollInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 590, 440));
+        jPanel2.add(scrollInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 660, 440));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 710, 460));
 
@@ -915,41 +1206,89 @@ public class MenuInicio extends javax.swing.JFrame {
         jLabel12.setText("Inventario");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        btnBorrar.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        btnBorrar.setText("Borrar");
-        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBorrarActionPerformed(evt);
+        lblMostrar.setBackground(new java.awt.Color(153, 153, 255));
+        lblMostrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMostrarMouseClicked(evt);
             }
         });
-        jPanel1.add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 140, -1, -1));
+        lblMostrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnBuscarProd.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        btnBuscarProd.setText("Buscar");
-        btnBuscarProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarProdActionPerformed(evt);
+        lblMos.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        lblMos.setForeground(new java.awt.Color(255, 255, 255));
+        lblMos.setText("Mostrar");
+        lblMos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMosMouseClicked(evt);
             }
         });
-        jPanel1.add(btnBuscarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, -1, -1));
+        lblMostrar.add(lblMos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        btnEditar.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 90, -1, -1));
+        jPanel1.add(lblMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 250, 120, 40));
 
-        btnMostrar.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        btnMostrar.setText("Mostrar");
-        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMostrarActionPerformed(evt);
+        lblEditarbtn.setBackground(new java.awt.Color(153, 153, 255));
+        lblEditarbtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblEditarbtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEditarbtnMouseClicked(evt);
             }
         });
-        jPanel1.add(btnMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, -1, -1));
+        lblEditarbtn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblEd.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        lblEd.setForeground(new java.awt.Color(255, 255, 255));
+        lblEd.setText("Editar");
+        lblEd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEdMouseClicked(evt);
+            }
+        });
+        lblEditarbtn.add(lblEd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        jPanel1.add(lblEditarbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, 120, 40));
+
+        lblBorrar.setBackground(new java.awt.Color(153, 153, 255));
+        lblBorrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBorrarMouseClicked(evt);
+            }
+        });
+        lblBorrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblBorr.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        lblBorr.setForeground(new java.awt.Color(255, 255, 255));
+        lblBorr.setText("Borrar");
+        lblBorr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBorrMouseClicked(evt);
+            }
+        });
+        lblBorrar.add(lblBorr, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        jPanel1.add(lblBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 150, 120, 40));
+
+        lblBuscar.setBackground(new java.awt.Color(153, 153, 255));
+        lblBuscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBuscarMouseClicked(evt);
+            }
+        });
+        lblBuscar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblBusc.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
+        lblBusc.setForeground(new java.awt.Color(255, 255, 255));
+        lblBusc.setText("Buscar");
+        lblBusc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBuscMouseClicked(evt);
+            }
+        });
+        lblBuscar.add(lblBusc, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        jPanel1.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 200, 120, 40));
 
         jpnInventario.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -971,65 +1310,9 @@ public class MenuInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCarritoActionPerformed
-        // TODO add your handling code here:
-        int fila = jtbCarrito.getSelectedRow();
-
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un item");
-            return;
-        }
-
-        int nuevaCantidad = Integer.parseInt(
-                JOptionPane.showInputDialog("Nueva cantidad")
-        );
-
-        double precio = (double) modeloCarrito.getValueAt(fila, 2);
-        double nuevoSubtotal = nuevaCantidad * precio;
-
-        modeloCarrito.setValueAt(nuevaCantidad, fila, 3);
-        modeloCarrito.setValueAt(nuevoSubtotal, fila, 4);
-
-        recalcularTotal();
-    }//GEN-LAST:event_btnEditarCarritoActionPerformed
-
     private void txtRecibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRecibActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRecibActionPerformed
-
-    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-        // TODO add your handling code here:
-        try {
-            double recibido = Double.parseDouble(txtRecib.getText().trim());
-
-            if (recibido < totalVenta) {
-                JOptionPane.showMessageDialog(this, "Monto insuficiente");
-                return;
-            }
-
-            double cambio = recibido - totalVenta;
-            lblCambio.setText(String.valueOf(cambio));
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Ingrese un monto válido");
-        }
-    }//GEN-LAST:event_btnCalcularActionPerformed
-
-    private void btnFinVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinVentaActionPerformed
-        // TODO add your handling code here:
-        if (modeloCarrito.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Carrito vacío");
-            return;
-        }
-        boolean ok = guardarVenta();
-
-        if (ok) {
-            JOptionPane.showMessageDialog(this, "Venta realizada");
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al guardar venta");
-        }
-
-    }//GEN-LAST:event_btnFinVentaActionPerformed
 
     private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
         // TODO add your handling code here:
@@ -1050,245 +1333,6 @@ public class MenuInicio extends javax.swing.JFrame {
     private void txtpVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpVentaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtpVentaActionPerformed
-
-    private void btnGuardarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProdActionPerformed
-        // TODO add your handling code here:
-        Producto producto = new Producto();
-        ctrlProducto controlProd = new ctrlProducto();
-        //validar campos
-        if (txtDescripcion.getText().isEmpty() || txtStock.getText().isEmpty() || txtStockMin.getText().isEmpty() || txtCategoria.getText().isEmpty() || txtpVenta.getText().isEmpty() || txtCosto.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Complete todos los campos");
-        } else if (!controlProd.existeProducto(txtDescripcion.getText().trim())) {
-            try {
-                producto.setDescripcion(txtDescripcion.getText().trim());
-                producto.setStock(Integer.parseInt(txtStock.getText().trim()));
-                producto.setStockMin(Integer.parseInt(txtStockMin.getText().trim()));
-                producto.setCosto(Double.parseDouble(txtCosto.getText().trim()));
-                producto.setpVenta(Double.parseDouble(txtpVenta.getText().trim()));
-                producto.setCategoria(txtCategoria.getText().trim());
-                producto.setEstado(true);
-
-                if (controlProd.guardar(producto)) {
-                    JOptionPane.showMessageDialog(null, "Registro guardado");
-                    this.limpiarProducto();
-                    control.listarProductos(jtbInventario);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al guardar el producto ");
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error al guardar el producto ");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "El registro ya existe en la base de datos");
-        }
-
-    }//GEN-LAST:event_btnGuardarProdActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
-        int fila = jtbInventario.getSelectedRow();
-
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un producto");
-            return;
-        }
-
-        Producto p = new Producto();
-
-        String descripcion = JOptionPane.showInputDialog(
-                this,
-                "Ingrese la nueva descripción:",
-                jtbInventario.getValueAt(fila, 1)
-        );
-
-        int stock = Integer.parseInt(JOptionPane.showInputDialog(
-                this,
-                "Ingrese el nuevo stock:",
-                jtbInventario.getValueAt(fila, 2)
-        ));
-
-        int stockMin = Integer.parseInt(JOptionPane.showInputDialog(
-                this,
-                "Ingrese el nuevo stock mínimo:",
-                jtbInventario.getValueAt(fila, 3)
-        ));
-
-        double costo = Double.parseDouble(JOptionPane.showInputDialog(
-                this,
-                "Ingrese el nuevo costo:",
-                jtbInventario.getValueAt(fila, 4)
-        ));
-
-        double pventa = Double.parseDouble(JOptionPane.showInputDialog(
-                this,
-                "Ingrese el nuevo precio:",
-                jtbInventario.getValueAt(fila, 5)
-        ));
-
-        String categoria = JOptionPane.showInputDialog(
-                this,
-                "Ingrese la nueva categoría:",
-                jtbInventario.getValueAt(fila, 6)
-        );
-
-        p.setIdItem(Integer.parseInt(jtbInventario.getValueAt(fila, 0).toString()));
-        p.setDescripcion(descripcion);
-        p.setStock(stock);
-        p.setStockMin(stockMin);
-        p.setCosto(costo);
-        p.setpVenta(pventa);
-        p.setCategoria(categoria);
-        p.setEstado(true);
-
-        if (control.editarProducto(p)) {
-            JOptionPane.showMessageDialog(this, "Producto actualizado");
-            control.listarProductos(jtbInventario);
-        }
-
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        // TODO add your handling code here:
-        int fila = jtbInventario.getSelectedRow();
-
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un producto");
-            return;
-        }
-
-        int opcion = JOptionPane.showConfirmDialog(
-                this,
-                "¿Desea eliminar este producto?",
-                "Confirmar",
-                JOptionPane.YES_NO_OPTION
-        );
-
-        if (opcion != JOptionPane.YES_OPTION) {
-            return;
-        }
-
-        int idProducto = Integer.parseInt(
-                jtbInventario.getValueAt(fila, 0).toString()
-        );
-
-        if (control.eliminarProducto(idProducto)) {
-            JOptionPane.showMessageDialog(this, "Eliminado correctamente");
-            control.listarProductos(jtbInventario);
-        }
-    }//GEN-LAST:event_btnBorrarActionPerformed
-
-    private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
-        // TODO add your handling code here:
-        String texto = JOptionPane.showInputDialog(
-                this,
-                "Buscar por categoría o descripción:"
-        ).trim();
-
-        if (texto.isEmpty()) {
-            control.listarProductos(jtbInventario);
-        } else {
-            control.buscarProductos(jtbInventario, texto);
-        }
-
-    }//GEN-LAST:event_btnBuscarProdActionPerformed
-
-    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
-        // TODO add your handling code here:
-        control.listarProductos(jtbInventario);
-    }//GEN-LAST:event_btnMostrarActionPerformed
-
-    private void btnConsulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsulActionPerformed
-        // TODO add your handling code here:
-        String descripcion = txtDesConsul.getText().trim();
-        String categoria = txtCatConsul.getText().trim();
-
-        if (descripcion.isEmpty() && categoria.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingrese descripción o categoría");
-            return;
-        }
-
-        // Prioriza descripción si existe, si no usa categoría
-        String textoBusqueda = !descripcion.isEmpty() ? descripcion : categoria;
-
-        // MISMA forma que el buscar normal
-        control.buscarProductos(jtbConsulta, textoBusqueda);
-
-        // opcional: limpiar inputs
-        txtDesConsul.setText("");
-        txtCatConsul.setText("");
-    }//GEN-LAST:event_btnConsulActionPerformed
-
-    private void btnAgregarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarritoActionPerformed
-        // TODO add your handling code here:
-        if (cmbProductos.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Seleccione un producto");
-            return;
-        }
-
-        String descripcion = cmbProductos.getSelectedItem().toString();
-        int cantidad = (int) spnCantidadCarrito.getValue();
-
-        ctrlProducto cp = new ctrlProducto();
-        Producto p = cp.buscarPorDescripcion(descripcion);
-
-        if (p == null) {
-            JOptionPane.showMessageDialog(this, "Producto no encontrado");
-            return;
-        }
-
-        if (cantidad > p.getStock()) {
-            JOptionPane.showMessageDialog(this, "Stock insuficiente");
-            return;
-        }
-
-        double subtotal = cantidad * p.getpVenta();
-
-        modeloCarrito.addRow(new Object[]{
-            p.getIdItem(),
-            p.getDescripcion(),
-            p.getpVenta(),
-            cantidad,
-            subtotal
-        });
-
-        recalcularTotal();
-    }//GEN-LAST:event_btnAgregarCarritoActionPerformed
-
-    private void btnEliminarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarItemActionPerformed
-        // TODO add your handling code here:
-        int fila = jtbCarrito.getSelectedRow();
-
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un item");
-            return;
-        }
-
-        modeloCarrito.removeRow(fila);
-        recalcularTotal();
-    }//GEN-LAST:event_btnEliminarItemActionPerformed
-
-    private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
-        // TODO add your handling code here:
-        java.util.Date fechaSpinner = (java.util.Date) spFecha.getValue();
-
-        ctrlCorte ctrl = new ctrlCorte();
-        ctrl.generarCorteCaja(fechaSpinner);
-
-    }//GEN-LAST:event_btnPDFActionPerformed
-
-    private void btnCorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorteActionPerformed
-        // TODO add your handling code here:
-        java.util.Date fechaSpinner = (java.util.Date) spFecha.getValue();
-
-        ctrlCorte ctrl = new ctrlCorte();
-        Corte totales = ctrl.obtenerTotales(fechaSpinner);
-
-        lblEfectivo.setText(String.valueOf(totales.getEfectivo()));
-        lblTarjeta.setText(String.valueOf(totales.getTarjeta()));
-        lblTransfer.setText(String.valueOf(totales.getTransferencia()));
-        lblTotalFinal.setText(String.valueOf(totales.getTotalGeneral()));
-
-    }//GEN-LAST:event_btnCorteActionPerformed
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
 
@@ -1350,6 +1394,9 @@ public class MenuInicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         CardLayout card = (CardLayout) jpnCuerpo.getLayout();
         card.show(jpnCuerpo, "Usuario");
+        this.jpnVerUsuarios.setVisible(false);
+        this.jpnRegistrar.setVisible(false);
+
     }//GEN-LAST:event_lblUsuarioMouseClicked
 
     private void jLabel32MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel32MouseClicked
@@ -1377,30 +1424,421 @@ public class MenuInicio extends javax.swing.JFrame {
     private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
         // TODO add your handling code here:
         int op = JOptionPane.showConfirmDialog(this, "¿En verdad desea salir?");
-        if(op==0){
+        if (op == 0) {
             System.exit(0);
         } else {
             //nada
         }
     }//GEN-LAST:event_lblExitMouseClicked
 
+    private void jLabel36MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel36MouseClicked
+    }//GEN-LAST:event_jLabel36MouseClicked
+
+    private void jLabel37MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel37MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel37MouseClicked
+
+    private void txtPsswrdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPsswrdKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPsswrdKeyPressed
+
+    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioKeyPressed
+
+    private void jLabel40MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel40MouseClicked
+
+    }//GEN-LAST:event_jLabel40MouseClicked
+
+    private void lblVerUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVerUsuariosMouseClicked
+        // TODO add your handling code here:
+        this.jpnVerUsuarios.setVisible(true);
+        this.jpnRegistrar.setVisible(false);
+        controlU.listarUsuarios(jtbUsuarios);
+    }//GEN-LAST:event_lblVerUsuariosMouseClicked
+
+    private void lblRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrarMouseClicked
+        // TODO add your handling code here:
+        this.jpnVerUsuarios.setVisible(false);
+        this.jpnRegistrar.setVisible(true);
+    }//GEN-LAST:event_lblRegistrarMouseClicked
+
+    private void jpnGuardarUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnGuardarUMouseClicked
+        // TODO add your handling code here:
+        Usuario usuario = new Usuario();
+        ctrlUsuario controlUsuario = new ctrlUsuario();
+        //validar campos
+        if (txtUsuario.getText().isEmpty() || txtPsswrd.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Complete todos los campos");
+        } else if (!controlUsuario.existeUsuario(txtUsuario.getText().trim())) {
+            try {
+                usuario.setNombre(txtUsuario.getText().trim());
+                usuario.setPsswrd(txtPsswrd.getText().trim());
+                usuario.setRol(cbbRol.getSelectedItem().toString().trim());
+
+                if (controlUsuario.guardarUsuario(usuario)) {
+                    JOptionPane.showMessageDialog(null, "Registro guardado");
+                    this.limpiarUsuario();
+                    controlU.listarUsuarios(jtbUsuarios);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al guardar el usuario");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error al guardar el usuario ");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El registro ya existe en la base de datos");
+        }
+
+    }//GEN-LAST:event_jpnGuardarUMouseClicked
+
+    private void jLabel41MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel41MouseClicked
+
+    private void btnEliminarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioMouseClicked
+        // TODO add your handling code here:
+        int filaU = jtbUsuarios.getSelectedRow();
+
+        if (filaU == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un usuario");
+            return;
+        }
+
+        int opcion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Desea eliminar este usuario?",
+                "Confirmar",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (opcion != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        int idUsuario = Integer.parseInt(
+                jtbUsuarios.getValueAt(filaU, 0).toString()
+        );
+
+        if (controlU.eliminarUsuario(idUsuario)) {
+            JOptionPane.showMessageDialog(this, "Eliminado correctamente");
+            controlU.listarUsuarios(jtbUsuarios);
+        }
+        //
+        int fila = jtbInventario.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto");
+            return;
+        }
+    }//GEN-LAST:event_btnEliminarUsuarioMouseClicked
+
+    private void lblMosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMosMouseClicked
+
+    }//GEN-LAST:event_lblMosMouseClicked
+
+    private void lblEdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEdMouseClicked
+
+    }//GEN-LAST:event_lblEdMouseClicked
+
+    private void lblBorrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBorrMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblBorrMouseClicked
+
+    private void lblBuscMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblBuscMouseClicked
+
+    private void lblEditarbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditarbtnMouseClicked
+        int fila = jtbInventario.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto");
+            return;
+        }
+
+        Producto p = new Producto();
+
+        String descripcion = JOptionPane.showInputDialog(
+                this,
+                "Ingrese la nueva descripción:",
+                jtbInventario.getValueAt(fila, 1)
+        );
+
+        int stock = Integer.parseInt(JOptionPane.showInputDialog(
+                this,
+                "Ingrese el nuevo stock:",
+                jtbInventario.getValueAt(fila, 2)
+        ));
+
+        int stockMin = Integer.parseInt(JOptionPane.showInputDialog(
+                this,
+                "Ingrese el nuevo stock mínimo:",
+                jtbInventario.getValueAt(fila, 3)
+        ));
+
+        double costo = Double.parseDouble(JOptionPane.showInputDialog(
+                this,
+                "Ingrese el nuevo costo:",
+                jtbInventario.getValueAt(fila, 4)
+        ));
+
+        double pventa = Double.parseDouble(JOptionPane.showInputDialog(
+                this,
+                "Ingrese el nuevo precio:",
+                jtbInventario.getValueAt(fila, 5)
+        ));
+
+        String categoria = JOptionPane.showInputDialog(
+                this,
+                "Ingrese la nueva categoría:",
+                jtbInventario.getValueAt(fila, 6)
+        );
+
+        p.setIdItem(Integer.parseInt(jtbInventario.getValueAt(fila, 0).toString()));
+        p.setDescripcion(descripcion);
+        p.setStock(stock);
+        p.setStockMin(stockMin);
+        p.setCosto(costo);
+        p.setpVenta(pventa);
+        p.setCategoria(categoria);
+        p.setEstado(true);
+
+        if (control.editarProducto(p)) {
+            JOptionPane.showMessageDialog(this, "Producto actualizado");
+            control.listarProductos(jtbInventario);
+        }
+
+    }//GEN-LAST:event_lblEditarbtnMouseClicked
+
+    private void lblBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBorrarMouseClicked
+        int fila = jtbInventario.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto");
+            return;
+        }
+
+        int opcion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Desea eliminar este producto?",
+                "Confirmar",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (opcion != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        int idProducto = Integer.parseInt(
+                jtbInventario.getValueAt(fila, 0).toString()
+        );
+
+        if (control.eliminarProducto(idProducto)) {
+            JOptionPane.showMessageDialog(this, "Eliminado correctamente");
+            control.listarProductos(jtbInventario);
+        }
+    }//GEN-LAST:event_lblBorrarMouseClicked
+
+    private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
+        String texto = JOptionPane.showInputDialog(
+                this,
+                "Buscar por categoría o descripción:"
+        ).trim();
+
+        if (texto.isEmpty()) {
+            control.listarProductos(jtbInventario);
+        } else {
+            control.buscarProductos(jtbInventario, texto);
+        }
+
+    }//GEN-LAST:event_lblBuscarMouseClicked
+
+    private void lblMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMostrarMouseClicked
+        control.listarProductos(jtbInventario);
+    }//GEN-LAST:event_lblMostrarMouseClicked
+
+    private void lblCorteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCorteMouseClicked
+        java.util.Date fechaSpinner = (java.util.Date) spFecha.getValue();
+
+        ctrlCorte ctrl = new ctrlCorte();
+        Corte totales = ctrl.obtenerTotales(fechaSpinner);
+
+        lblEfectivo.setText(String.valueOf(totales.getEfectivo()));
+        lblTarjeta.setText(String.valueOf(totales.getTarjeta()));
+        lblTransfer.setText(String.valueOf(totales.getTransferencia()));
+        lblTotalFinal.setText(String.valueOf(totales.getTotalGeneral()));
+    }//GEN-LAST:event_lblCorteMouseClicked
+
+    private void lblPDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPDFMouseClicked
+        java.util.Date fechaSpinner = (java.util.Date) spFecha.getValue();
+
+        ctrlCorte ctrl = new ctrlCorte();
+        ctrl.generarCorteCaja(fechaSpinner);
+
+    }//GEN-LAST:event_lblPDFMouseClicked
+
+    private void lblBuscarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarBtnMouseClicked
+        String descripcion = txtDesConsul.getText().trim();
+        String categoria = txtCatConsul.getText().trim();
+
+        if (descripcion.isEmpty() && categoria.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese descripción o categoría");
+            return;
+        }
+
+        // Prioriza descripción si existe, si no usa categoría
+        String textoBusqueda = !descripcion.isEmpty() ? descripcion : categoria;
+
+        // MISMA forma que el buscar normal
+        control.buscarProductos(jtbConsulta, textoBusqueda);
+
+        // opcional: limpiar inputs
+        txtDesConsul.setText("");
+        txtCatConsul.setText("");
+    }//GEN-LAST:event_lblBuscarBtnMouseClicked
+
+    private void jLabel42MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel42MouseClicked
+        Producto producto = new Producto();
+        ctrlProducto controlProd = new ctrlProducto();
+        //validar campos
+        if (txtDescripcion.getText().isEmpty() || txtStock.getText().isEmpty() || txtStockMin.getText().isEmpty() || txtCategoria.getText().isEmpty() || txtpVenta.getText().isEmpty() || txtCosto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Complete todos los campos");
+        } else if (!controlProd.existeProducto(txtDescripcion.getText().trim())) {
+            try {
+                producto.setDescripcion(txtDescripcion.getText().trim());
+                producto.setStock(Integer.parseInt(txtStock.getText().trim()));
+                producto.setStockMin(Integer.parseInt(txtStockMin.getText().trim()));
+                producto.setCosto(Double.parseDouble(txtCosto.getText().trim()));
+                producto.setpVenta(Double.parseDouble(txtpVenta.getText().trim()));
+                producto.setCategoria(txtCategoria.getText().trim());
+                producto.setEstado(true);
+
+                if (controlProd.guardar(producto)) {
+                    JOptionPane.showMessageDialog(null, "Registro guardado");
+                    this.limpiarProducto();
+                    control.listarProductos(jtbInventario);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al guardar el producto ");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error al guardar el producto ");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El registro ya existe en la base de datos");
+        }
+    }//GEN-LAST:event_jLabel42MouseClicked
+
+    private void lblAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgregarMouseClicked
+        if (cmbProductos.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto");
+            return;
+        }
+
+        String descripcion = cmbProductos.getSelectedItem().toString();
+        int cantidad = (int) spnCantidadCarrito.getValue();
+
+        ctrlProducto cp = new ctrlProducto();
+        Producto p = cp.buscarPorDescripcion(descripcion);
+
+        if (p == null) {
+            JOptionPane.showMessageDialog(this, "Producto no encontrado");
+            return;
+        }
+
+        if (cantidad > p.getStock()) {
+            JOptionPane.showMessageDialog(this, "Stock insuficiente");
+            return;
+        }
+
+        double subtotal = cantidad * p.getpVenta();
+
+        modeloCarrito.addRow(new Object[]{
+            p.getIdItem(),
+            p.getDescripcion(),
+            p.getpVenta(),
+            cantidad,
+            subtotal
+        });
+
+        recalcularTotal();
+    }//GEN-LAST:event_lblAgregarMouseClicked
+
+    private void lblCambioBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCambioBMouseClicked
+        try {
+            double recibido = Double.parseDouble(txtRecib.getText().trim());
+
+            if (recibido < totalVenta) {
+                JOptionPane.showMessageDialog(this, "Monto insuficiente");
+                return;
+            }
+
+            double cambio = recibido - totalVenta;
+            lblCambio.setText(String.valueOf(cambio));
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese un monto válido");
+        }
+    }//GEN-LAST:event_lblCambioBMouseClicked
+
+    private void lblEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEliminarMouseClicked
+        int fila = jtbCarrito.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un item");
+            return;
+        }
+
+        modeloCarrito.removeRow(fila);
+        recalcularTotal();
+    }//GEN-LAST:event_lblEliminarMouseClicked
+
+    private void lblEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEditarMouseClicked
+        int fila = jtbCarrito.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un item");
+            return;
+        }
+
+        int nuevaCantidad = Integer.parseInt(
+                JOptionPane.showInputDialog("Nueva cantidad")
+        );
+
+        double precio = (double) modeloCarrito.getValueAt(fila, 2);
+        double nuevoSubtotal = nuevaCantidad * precio;
+
+        modeloCarrito.setValueAt(nuevaCantidad, fila, 3);
+        modeloCarrito.setValueAt(nuevoSubtotal, fila, 4);
+
+        recalcularTotal();
+    }//GEN-LAST:event_lblEditarMouseClicked
+
+    private void lblFinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFinMouseClicked
+        if (modeloCarrito.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Carrito vacío");
+            return;
+        }
+        boolean ok = guardarVenta();
+
+        if (ok) {
+            JOptionPane.showMessageDialog(this, "Venta realizada");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al guardar venta");
+        }
+
+    }//GEN-LAST:event_lblFinMouseClicked
+
+    private void cbbForPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbForPagoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbForPagoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IdItem;
-    private javax.swing.JButton btnAgregarCarrito;
-    private javax.swing.JButton btnBorrar;
-    private javax.swing.JButton btnBuscarProd;
-    private javax.swing.JButton btnCalcular;
-    private javax.swing.JButton btnConsul;
-    private javax.swing.JButton btnCorte;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEditarCarrito;
-    private javax.swing.JButton btnEliminarItem;
-    private javax.swing.JButton btnFinVenta;
-    private javax.swing.JButton btnGuardarProd;
-    private javax.swing.JButton btnMostrar;
-    private javax.swing.JButton btnPDF;
+    private javax.swing.JPanel btnEliminarUsuario;
     private javax.swing.JComboBox<String> cbbForPago;
+    private javax.swing.JComboBox<String> cbbRol;
     private javax.swing.JComboBox<String> cmbProductos;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -1429,42 +1867,99 @@ public class MenuInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JPanel jpnCardInicial;
     private javax.swing.JPanel jpnConsulta;
     private javax.swing.JPanel jpnCuerpo;
     private javax.swing.JPanel jpnEstadisticas;
+    private javax.swing.JPanel jpnGuardarU;
     private javax.swing.JPanel jpnInicio;
     private javax.swing.JPanel jpnInventario;
     private javax.swing.JPanel jpnMenu;
     private javax.swing.JPanel jpnProducto;
+    private javax.swing.JPanel jpnRegistrar;
     private javax.swing.JPanel jpnReporte;
     private javax.swing.JPanel jpnUsuario;
     private javax.swing.JPanel jpnVentas;
+    private javax.swing.JPanel jpnVerUsuario;
+    private javax.swing.JPanel jpnVerUsuarios;
     public static javax.swing.JTable jtbCarrito;
     public static javax.swing.JTable jtbConsulta;
     public static javax.swing.JTable jtbInventario;
+    public static javax.swing.JTable jtbUsuarios;
+    private javax.swing.JLabel lblAgregar;
+    private javax.swing.JLabel lblBorr;
+    private javax.swing.JPanel lblBorrar;
+    private javax.swing.JLabel lblBusc;
+    private javax.swing.JPanel lblBuscar;
+    private javax.swing.JLabel lblBuscarBtn;
     private javax.swing.JLabel lblCambio;
+    private javax.swing.JLabel lblCambioB;
     private javax.swing.JPanel lblConsultaR;
+    private javax.swing.JLabel lblCorte;
+    private javax.swing.JLabel lblEd;
+    private javax.swing.JLabel lblEditar;
+    private javax.swing.JPanel lblEditarbtn;
     private javax.swing.JLabel lblEfectivo;
+    private javax.swing.JLabel lblEliminar;
     private javax.swing.JPanel lblEstad;
     private javax.swing.JLabel lblExit;
+    private javax.swing.JLabel lblFin;
     private javax.swing.JPanel lblInventario;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMinus;
+    private javax.swing.JLabel lblMos;
+    private javax.swing.JPanel lblMostrar;
+    private javax.swing.JLabel lblPDF;
     private javax.swing.JPanel lblProductos;
+    private javax.swing.JPanel lblRegistrar;
     private javax.swing.JPanel lblReporte;
     private javax.swing.JLabel lblTarjeta;
     private javax.swing.JLabel lblTotal;
@@ -1472,9 +1967,11 @@ public class MenuInicio extends javax.swing.JFrame {
     private javax.swing.JLabel lblTransfer;
     private javax.swing.JPanel lblUsuario;
     private javax.swing.JPanel lblVentas;
+    private javax.swing.JPanel lblVerUsuarios;
     private javax.swing.JScrollPane sclItems;
     public static javax.swing.JScrollPane scrollInventario;
     public static javax.swing.JScrollPane scrollInventario1;
+    public static javax.swing.JScrollPane scrollInventario2;
     private javax.swing.JSpinner spFecha;
     private javax.swing.JSpinner spnCantidadCarrito;
     private javax.swing.JTextField txtCatConsul;
@@ -1482,9 +1979,11 @@ public class MenuInicio extends javax.swing.JFrame {
     private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtDesConsul;
     private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JTextField txtPsswrd;
     private javax.swing.JTextField txtRecib;
     private javax.swing.JTextField txtStock;
     private javax.swing.JTextField txtStockMin;
+    private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtpVenta;
     // End of variables declaration//GEN-END:variables
 
@@ -1496,6 +1995,11 @@ public class MenuInicio extends javax.swing.JFrame {
         txtCosto.setText("");
         txtpVenta.setText("");
         txtCategoria.setText("");
+    }
+
+    public void limpiarUsuario() {
+        txtUsuario.setText("");
+        txtPsswrd.setText("");
     }
 
     private void refrescarTabla() {
